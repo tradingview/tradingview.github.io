@@ -46,13 +46,6 @@
             "type": "string",
             "required": true
         },
-        "instrument-id": {
-            "name": "instrument-id",
-            "description": "Broker instrument name",
-            "in": "path",
-            "type": "string",
-            "required": true
-        },
         "symbol": {
             "name": "symbol",
             "in": "query",
@@ -64,6 +57,7 @@
             "name": "resolution",
             "in": "query",
             "description": "Symbol resolution",
+            "required": true,
             "type": "string"
         },
         "from": {
@@ -105,31 +99,25 @@
     },
     "tags": [
         {
-            "name": "trading",
-            "description": "Implementation is required to use trading capabilities"
+            "name": "site-trading-and-data",
+            "description": "Integration of Broker trading and data to TradingView.com"
         },
         {
-            "name": "data",
-            "description": "Implementation is required to provide data for charts"
-        },
-        {
-            "name": "site",
-            "description": "Implementation is specific for TradingView.com integration. It is not required in Trading Platform."
+            "name": "site-trading-only",
+            "description": "Integration of a Broker to TradingView.com when charts data is already available"
         },
         {
             "name": "platform",
-            "description": "Implementation is specific for Trading Platform integration. It is not required for TradingView.com integration."
-        },
-        {
-            "name": "general",
-            "description": "Implementation is required for any integration."
+            "description": "Trading Platform integration."
         }
     ],
     "paths": {
         "/authorize": {
             "get": {
                 "tags": [
-                    "general"
+                    "site-trading-and-data",
+                    "site-trading-only",
+                    "platform"
                 ],
                 "description": "Oauth2 Password authorization",
                 "responses": {
@@ -161,8 +149,9 @@
         "/accounts": {
             "get": {
                 "tags": [
-                    "trading",
-                    "general"
+                    "site-trading-and-data",
+                    "site-trading-only",
+                    "platform"
                 ],
                 "security": [
                     {
@@ -191,8 +180,9 @@
         "/accounts/{account-id}/state": {
             "get": {
                 "tags": [
-                    "trading",
-                    "general"
+                    "site-trading-and-data",
+                    "site-trading-only",
+                    "platform"
                 ],
                 "security": [
                     {
@@ -232,8 +222,9 @@
         "/accounts/{account-id}/orders": {
             "get": {
                 "tags": [
-                    "trading",
-                    "general"
+                    "site-trading-and-data",
+                    "site-trading-only",
+                    "platform"
                 ],
                 "security": [
                     {
@@ -260,8 +251,9 @@
             },
             "post": {
                 "tags": [
-                    "trading",
-                    "general"
+                    "site-trading-and-data",
+                    "site-trading-only",
+                    "platform"
                 ],
                 "security": [
                     {
@@ -358,8 +350,9 @@
         "/accounts/{account-id}/ordersHistory": {
             "get": {
                 "tags": [
-                    "trading",
-                    "general"
+                    "site-trading-and-data",
+                    "site-trading-only",
+                    "platform"
                 ],
                 "security": [
                     {
@@ -394,8 +387,9 @@
         "/accounts/{account-id}/orders/{order-id}": {
             "get": {
                 "tags": [
-                    "trading",
-                    "general"
+                    "site-trading-and-data",
+                    "site-trading-only",
+                    "platform"
                 ],
                 "security": [
                     {
@@ -422,8 +416,9 @@
             },
             "put": {
                 "tags": [
-                    "trading",
-                    "general"
+                    "site-trading-and-data",
+                    "site-trading-only",
+                    "platform"
                 ],
                 "security": [
                     {
@@ -477,8 +472,9 @@
             },
             "delete": {
                 "tags": [
-                    "trading",
-                    "general"
+                    "site-trading-and-data",
+                    "site-trading-only",
+                    "platform"
                 ],
                 "security": [
                     {
@@ -504,8 +500,9 @@
         "/accounts/{account-id}/positions": {
             "get": {
                 "tags": [
-                    "trading",
-                    "general"
+                    "site-trading-and-data",
+                    "site-trading-only",
+                    "platform"
                 ],
                 "security": [
                     {
@@ -534,8 +531,9 @@
         "/accounts/{account-id}/positions/{position-id}": {
             "get": {
                 "tags": [
-                    "trading",
-                    "general"
+                    "site-trading-and-data",
+                    "site-trading-only",
+                    "platform"
                 ],
                 "security": [
                     {
@@ -562,8 +560,9 @@
             },
             "put": {
                 "tags": [
-                    "trading",
-                    "general"
+                    "site-trading-and-data",
+                    "site-trading-only",
+                    "platform"
                 ],
                 "security": [
                     {
@@ -599,8 +598,9 @@
             },
             "delete": {
                 "tags": [
-                    "trading",
-                    "general"
+                    "site-trading-and-data",
+                    "site-trading-only",
+                    "platform"
                 ],
                 "security": [
                     {
@@ -626,8 +626,9 @@
         "/accounts/{account-id}/positions/{position-id}/state": {
             "get": {
                 "tags": [
-                    "trading",
-                    "general"
+                    "site-trading-and-data",
+                    "site-trading-only",
+                    "platform"
                 ],
                 "security": [
                     {
@@ -661,8 +662,9 @@
         "/accounts/{account-id}/executions": {
             "get": {
                 "tags": [
-                    "trading",
-                    "general"
+                    "site-trading-and-data",
+                    "site-trading-only",
+                    "platform"
                 ],
                 "security": [
                     {
@@ -709,8 +711,9 @@
         "/accounts/{account-id}/instruments": {
             "get": {
                 "tags": [
-                    "trading",
-                    "general"
+                    "site-trading-and-data",
+                    "site-trading-only",
+                    "platform"
                 ],
                 "security": [
                     {
@@ -741,62 +744,19 @@
                 }
             }
         },
-        "/mapping/tvtobroker/{instrument-id}": {
+        "/mapping": {
             "get": {
                 "tags": [
-                    "trading",
-                    "site"
+                    "site-trading-and-data",
+                    "site-trading-only"
                 ],
-                "security": [
-                    {
-                        "oauth": []
-                    }
-                ],
-                "description": "Return broker instrument name by TradingView instrument name. Required to add Broker to TradingView.com. It is not required for Trading Platform integration.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/instrument-id"
-                    }
-                ],
+                "description": "Return all broker instruments with corresponding TradingView instruments. Required to add a Broker to TradingView.com. It is not required for Trading Platform integration. This request works without authorization!",
                 "responses": {
                     "200": {
-                        "description": "TradingView instrument name",
+                        "description": "Broker - TradingView instruments map",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/SymbolMapping"
                         }
-                    },
-                    "404": {
-                        "description": "Instrument not found"
-                    }
-                }
-            }
-        },
-        "/mapping/brokertotv/{instrument-id}": {
-            "get": {
-                "tags": [
-                    "trading",
-                    "site"
-                ],
-                "security": [
-                    {
-                        "oauth": []
-                    }
-                ],
-                "description": "Return TradingView instrument name by broker instrument name. Required to add Broker to TradingView.com. It is not required for Trading Platform integration.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/instrument-id"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Broker instrument name",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "404": {
-                        "description": "Instrument not found"
                     }
                 }
             }
@@ -804,8 +764,13 @@
         "/symbol_info": {
             "get": {
                 "tags": [
-                    "data",
-                    "general"
+                    "site-trading-and-data",
+                    "platform"
+                ],
+                "security": [
+                    {
+                        "oauth": []
+                    }
                 ],
                 "description": "Get a list of all instruments of a specific group.",
                 "parameters": [
@@ -830,8 +795,13 @@
         "/history": {
             "get": {
                 "tags": [
-                    "data",
-                    "general"
+                    "site-trading-and-data",
+                    "platform"
+                ],
+                "security": [
+                    {
+                        "oauth": []
+                    }
                 ],
                 "description": "Bars request. You can find examples in the [documentation](https://github.com/tradingview/charting_library/wiki/UDF#bars).",
                 "parameters": [
@@ -864,8 +834,12 @@
         "/marks": {
             "get": {
                 "tags": [
-                    "data",
                     "platform"
+                ],
+                "security": [
+                    {
+                        "oauth": []
+                    }
                 ],
                 "description": "Request for bar marks (circles on top of bars). You can display custom marks only in the Trading Platform.",
                 "parameters": [
@@ -895,8 +869,12 @@
         "/timescale_marks": {
             "get": {
                 "tags": [
-                    "data",
                     "platform"
+                ],
+                "security": [
+                    {
+                        "oauth": []
+                    }
                 ],
                 "description": "Request for timescale marks (circles on the timescale). You can display custom marks only in the Trading Platform.",
                 "parameters": [
@@ -926,9 +904,14 @@
         "/quotes": {
             "get": {
                 "tags": [
-                    "data",
-                    "trading",
-                    "general"
+                    "site-trading-and-data",
+                    "site-trading-only",
+                    "platform"
+                ],
+                "security": [
+                    {
+                        "oauth": []
+                    }
                 ],
                 "description": "Get current prices of the instrument",
                 "parameters": [
@@ -976,8 +959,12 @@
         "/streaming": {
             "get": {
                 "tags": [
-                    "data",
-                    "site"
+                    "site-trading-and-data"
+                ],
+                "security": [
+                    {
+                        "oauth": []
+                    }
                 ],
                 "description": "Stream of prices. Server constantly keeps the connection alive. If the connection is broken the server constantly tries to restore it. Transfer mode is 'chunked encoding'. The data feed should set 'Transfer-Encoding: chunked' and make sure that all intermediate proxies are set to use this mode. All messages are finished with '\r\n'. Streaming data should contain real-time only. It shouldn't contain snapshots of data.",
                 "responses": {
@@ -1698,6 +1685,49 @@
                     "type": "number"
                 }
             }
+        },
+        "SymbolMapping": {
+            "type": "object",
+            "description": "Map of Broker instrument names and TradingView instrument names",
+            "properties": {
+                "symbols": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SingleMapping"
+                    }
+                },
+                "fields": {
+                    "description": "Array with the only one constant 'brokerSymbol' value.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SingleField"
+                    }
+                }
+            }
+        },
+        "SingleMapping": {
+            "type": "object",
+            "description": "Map of Broker instrument name to TradingView instrument name",
+            "properties": {
+                "f": {
+                    "description": "An array with the only one string element - broker symbol name.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "s": {
+                    "description": "TradingView symbol name",
+                    "type": "string"
+                }
+            }
+        },
+        "SingleField": {
+            "type": "string",
+            "enum": [
+                "brokerSymbol"
+            ],
+            "description": "Constant. Should not be changed."
         }
     }
 }
