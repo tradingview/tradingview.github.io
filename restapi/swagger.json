@@ -1620,9 +1620,6 @@
                 "side"
             ],
             "properties": {
-                "id": {
-                    "type": "string"
-                },
                 "instrument": {
                     "description": "Instrument id",
                     "type": "string"
