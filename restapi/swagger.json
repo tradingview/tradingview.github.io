@@ -266,7 +266,10 @@
                                     "type": "string"
                                 },
                                 "d": {
-                                    "$ref": "#/definitions/AccountResponse"
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Account"
+                                    }
                                 }
                             }
                         }
@@ -469,8 +472,13 @@
                                 "errmsg": {
                                     "type": "string"
                                 },
-                                "orderId": {
-                                    "type": "string"
+                                "d": {
+                                    "type": "object",
+                                    "properties": {
+                                        "orderId": {
+                                            "type": "string"
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -490,7 +498,7 @@
                         "oauth": []
                     }
                 ],
-                "description": "Get orders history for an account.",
+                "description": "Get orders history for an account. It is expected that returned orders will have a final status (rejected, filled, canceled).",
                 "parameters": [
                     {
                         "$ref": "#/parameters/account-id"
@@ -541,7 +549,7 @@
                         "oauth": []
                     }
                 ],
-                "description": "Get an order for an account. It can be a pending or historical order.",
+                "description": "Get an order for an account. It can be an active or historical order.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/account-id"
@@ -756,7 +764,7 @@
                         "oauth": []
                     }
                 ],
-                "description": "Modify an existing position.",
+                "description": "Modify an existing position stop loss or take profit or both.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/account-id"
@@ -1138,7 +1146,7 @@
                 "description": "Stream of prices. Server constantly keeps the connection alive. If the connection is broken the server constantly tries to restore it. Transfer mode is 'chunked encoding'. The data feed should set 'Transfer-Encoding: chunked' and make sure that all intermediate proxies are set to use this mode. All messages are finished with '\\r\\n'. Streaming data should contain real-time only. It shouldn't contain snapshots of data.",
                 "responses": {
                     "200": {
-                        "description": "Data feed should provide ticks (trades, asks, bids). \n\nIf there is no trades the data feed should set trades to bids. \n\nSize for trades is always >= 1 except it is a correction. \n\nIn case of correction is can be 0. All times should be UNIX time UTC. \n\nDaily bars are needed if they cannot be built from ticks (has_dwm should be set to true in the symbol information). \n\nFields for asks, bids and trades: `id`, `p`, `s` (optional for asks and bids), `t`, `f`. \n\nFields for daily bars: `id`, `t`, `o`, `h`, `l`, `c`, `v`.\n",
+                        "description": "Data feed should provide ticks (trades, asks, bids) and daily bars. \n\nIf there is no trades the data feed should set trades to bids. \n\nIf there is only ask/bid implementation you must also send trade (same as bid but it's size must be >= 1).\n\nSize for trades is always >= 1 except it is a correction. \n\nIn case of correction is can be 0. All times should be UNIX time UTC. \n\nDaily bars are required if they cannot be built from ticks (has_dwm should be set to true in the symbol information). \n\nFields for asks, bids and trades: `id`, `p`, `s` (optional for asks and bids), `t`, `f`. \n\nFields for daily bars: `id`, `t`, `o`, `h`, `l`, `c`, `v`.\n",
                         "schema": {
                             "type": "object",
                             "required": [
@@ -1240,17 +1248,6 @@
                     "description": "Localized array of durations displayed in Order Ticket",
                     "items": {
                         "$ref": "#/definitions/Duration"
-                    }
-                }
-            }
-        },
-        "AccountResponse": {
-            "type": "object",
-            "properties": {
-                "accounts": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Account"
                     }
                 }
             }
@@ -1423,7 +1420,7 @@
                     "type": "boolean"
                 },
                 "supportPLUpdate": {
-                    "description": "Whether if you provide unrealizedPl for positions. Otherwise PL will be calculated automatically based on a simple algorithm.",
+                    "description": "Whether you provide unrealizedPl for positions. Otherwise PL will be calculated automatically based on a simple algorithm.",
                     "type": "boolean"
                 },
                 "supportReducePosition": {
@@ -1616,7 +1613,6 @@
         "Execution": {
             "type": "object",
             "required": [
-                "id",
                 "instrument",
                 "price",
                 "time",
