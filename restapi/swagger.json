@@ -119,13 +119,13 @@
             "schema": {
                 "type": "object",
                 "required": [
-                    "status"
+                    "s"
                 ],
                 "properties": {
-                    "status": {
+                    "s": {
                         "$ref": "#/definitions/Status"
                     },
-                    "message": {
+                    "errmsg": {
                         "type": "string"
                     }
                 }
@@ -176,16 +176,18 @@
                         "description": "Access Token. TradingView will set Authorization header to 'Bearer ' + access_token for all requests with authorization.",
                         "schema": {
                             "type": "object",
+                            "required": [
+                                "s"
+                            ],
                             "properties": {
-                                "access_token": {
-                                    "description": "Access token that acts as a session ID that the application uses for making requests. This token should be protected as though it were user credentials.",
-                                    "type": "string"
-                                },
-                                "expiration": {
-                                    "description": "Time when the token is expired represented as the number of seconds since the Unix epoch (00:00:00 UTC on 1 January 1970)."
+                                "s": {
+                                    "$ref": "#/definitions/Status"
                                 },
                                 "errmsg": {
-                                    "description": "Error message if the authorization has failed."
+                                    "type": "string"
+                                },
+                                "d": {
+                                    "$ref": "#/definitions/AuthorizationResponse"
                                 }
                             }
                         }
@@ -216,20 +218,18 @@
                         "description": "Configuration",
                         "schema": {
                             "type": "object",
+                            "required": [
+                                "s"
+                            ],
                             "properties": {
-                                "accountManager": {
-                                    "type": "array",
-                                    "description": "Localized account manager tables configuration",
-                                    "items": {
-                                        "$ref": "#/definitions/AccountManagerTable"
-                                    }
+                                "s": {
+                                    "$ref": "#/definitions/Status"
                                 },
-                                "durations": {
-                                    "type": "array",
-                                    "description": "Localized array of durations displayed in Order Ticket",
-                                    "items": {
-                                        "$ref": "#/definitions/Duration"
-                                    }
+                                "errmsg": {
+                                    "type": "string"
+                                },
+                                "d": {
+                                    "$ref": "#/definitions/ConfigResponse"
                                 }
                             }
                         }
@@ -255,12 +255,18 @@
                         "description": "Accounts list",
                         "schema": {
                             "type": "object",
+                            "required": [
+                                "s"
+                            ],
                             "properties": {
-                                "accounts": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/Account"
-                                    }
+                                "s": {
+                                    "$ref": "#/definitions/Status"
+                                },
+                                "errmsg": {
+                                    "type": "string"
+                                },
+                                "d": {
+                                    "$ref": "#/definitions/AccountResponse"
                                 }
                             }
                         }
@@ -295,32 +301,17 @@
                         "schema": {
                             "type": "object",
                             "required": [
-                                "balance",
-                                "unrealizedPl"
+                                "s"
                             ],
                             "properties": {
-                                "balance": {
-                                    "description": "Account Balance",
-                                    "type": "number"
+                                "s": {
+                                    "$ref": "#/definitions/Status"
                                 },
-                                "unrealizedPl": {
-                                    "description": "Unrealized Profit/loss",
-                                    "type": "number"
+                                "errmsg": {
+                                    "type": "string"
                                 },
-                                "amData": {
-                                    "description": "Account Manager data. Each element of this array is a table.",
-                                    "type": "array",
-                                    "items": {
-                                        "description": "Single Account Manager table data. Each element of this array is a table raw.",
-                                        "type": "array",
-                                        "items": {
-                                            "description": "Account Manager table raw data. Each element of this array is a table cell.",
-                                            "type": "array",
-                                            "items": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    }
+                                "d": {
+                                    "$ref": "#/definitions/AccountStateResponse"
                                 }
                             }
                         }
@@ -350,9 +341,23 @@
                     "200": {
                         "description": "List of pending orders. It is also expected that broker returns orders filled/cancelled/rejected during current session.",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Order"
+                            "type": "object",
+                            "required": [
+                                "s"
+                            ],
+                            "properties": {
+                                "s": {
+                                    "$ref": "#/definitions/Status"
+                                },
+                                "errmsg": {
+                                    "type": "string"
+                                },
+                                "d": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Order"
+                                    }
+                                }
                             }
                         }
                     }
@@ -455,13 +460,13 @@
                         "schema": {
                             "type": "object",
                             "required": [
-                                "status"
+                                "s"
                             ],
                             "properties": {
-                                "status": {
+                                "s": {
                                     "$ref": "#/definitions/Status"
                                 },
-                                "message": {
+                                "errmsg": {
                                     "type": "string"
                                 },
                                 "orderId": {
@@ -501,9 +506,23 @@
                     "200": {
                         "description": "List of orders",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Order"
+                            "type": "object",
+                            "required": [
+                                "s"
+                            ],
+                            "properties": {
+                                "s": {
+                                    "$ref": "#/definitions/Status"
+                                },
+                                "errmsg": {
+                                    "type": "string"
+                                },
+                                "d": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Order"
+                                    }
+                                }
                             }
                         }
                     }
@@ -533,9 +552,23 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Order object",
+                        "description": "Order",
                         "schema": {
-                            "$ref": "#/definitions/Order"
+                            "type": "object",
+                            "required": [
+                                "s"
+                            ],
+                            "properties": {
+                                "s": {
+                                    "$ref": "#/definitions/Status"
+                                },
+                                "errmsg": {
+                                    "type": "string"
+                                },
+                                "d": {
+                                    "$ref": "#/definitions/Order"
+                                }
+                            }
                         }
                     }
                 }
@@ -645,9 +678,23 @@
                     "200": {
                         "description": "Array of positions",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Position"
+                            "type": "object",
+                            "required": [
+                                "s"
+                            ],
+                            "properties": {
+                                "s": {
+                                    "$ref": "#/definitions/Status"
+                                },
+                                "errmsg": {
+                                    "type": "string"
+                                },
+                                "d": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Position"
+                                    }
+                                }
                             }
                         }
                     }
@@ -679,7 +726,21 @@
                     "200": {
                         "description": "Position object",
                         "schema": {
-                            "$ref": "#/definitions/Position"
+                            "type": "object",
+                            "required": [
+                                "s"
+                            ],
+                            "properties": {
+                                "s": {
+                                    "$ref": "#/definitions/Status"
+                                },
+                                "errmsg": {
+                                    "type": "string"
+                                },
+                                "d": {
+                                    "$ref": "#/definitions/Position"
+                                }
+                            }
                         }
                     }
                 }
@@ -749,49 +810,6 @@
                 }
             }
         },
-        "/accounts/{account-id}/positions/{position-id}/state": {
-            "get": {
-                "tags": [
-                    "site-trading-and-data",
-                    "site-trading-only",
-                    "platform"
-                ],
-                "security": [
-                    {
-                        "oauth": []
-                    }
-                ],
-                "description": "Get a position open profit/loss (unrealizedPl).",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/account-id"
-                    },
-                    {
-                        "$ref": "#/parameters/position-id"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Profit or loss value",
-                        "schema": {
-                            "type": "object",
-                            "required": [
-                                "unrealizedPl",
-                                "realizedPl"
-                            ],
-                            "properties": {
-                                "unrealizedPl": {
-                                    "type": "number"
-                                },
-                                "realizedPl": {
-                                    "type": "number"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/accounts/{account-id}/executions": {
             "get": {
                 "tags": [
@@ -804,7 +822,7 @@
                         "oauth": []
                     }
                 ],
-                "description": "Get a list of executions (i.e. fills, trades) for an account and an instrument. Executions are displayed on a chart.",
+                "description": "Get a list of executions (i.e. fills or trades) for an account and an instrument. Executions are displayed on a chart.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/account-id"
@@ -828,8 +846,17 @@
                         "description": "List of executions",
                         "schema": {
                             "type": "object",
+                            "required": [
+                                "s"
+                            ],
                             "properties": {
-                                "executions": {
+                                "s": {
+                                    "$ref": "#/definitions/Status"
+                                },
+                                "errmsg": {
+                                    "type": "string"
+                                },
+                                "d": {
                                     "type": "array",
                                     "items": {
                                         "$ref": "#/definitions/Execution"
@@ -863,9 +890,23 @@
                     "200": {
                         "description": "List of instruments.",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Instrument"
+                            "type": "object",
+                            "required": [
+                                "s"
+                            ],
+                            "properties": {
+                                "s": {
+                                    "$ref": "#/definitions/Status"
+                                },
+                                "errmsg": {
+                                    "type": "string"
+                                },
+                                "d": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Instrument"
+                                    }
+                                }
                             }
                         }
                     }
@@ -1094,10 +1135,10 @@
                         "oauth": []
                     }
                 ],
-                "description": "Stream of prices. Server constantly keeps the connection alive. If the connection is broken the server constantly tries to restore it. Transfer mode is 'chunked encoding'. The data feed should set 'Transfer-Encoding: chunked' and make sure that all intermediate proxies are set to use this mode. All messages are finished with '\r\n'. Streaming data should contain real-time only. It shouldn't contain snapshots of data.",
+                "description": "Stream of prices. Server constantly keeps the connection alive. If the connection is broken the server constantly tries to restore it. Transfer mode is 'chunked encoding'. The data feed should set 'Transfer-Encoding: chunked' and make sure that all intermediate proxies are set to use this mode. All messages are finished with '\\r\\n'. Streaming data should contain real-time only. It shouldn't contain snapshots of data.",
                 "responses": {
                     "200": {
-                        "description": "Data feed should provide ticks (trades, asks, bids). If there is no trades the data feed should set trades to bids (size should be 1 in this case). All times should be in UTC. Daily bars are needed if they cannot be built from ticks (has_dwm should be set to true in the symbol information).",
+                        "description": "Data feed should provide ticks (trades, asks, bids). \n\nIf there is no trades the data feed should set trades to bids. \n\nSize for trades is always >= 1 except it is a correction. \n\nIn case of correction is can be 0. All times should be UNIX time UTC. \n\nDaily bars are needed if they cannot be built from ticks (has_dwm should be set to true in the symbol information). \n\nFields for asks, bids and trades: `id`, `p`, `s` (optional for asks and bids), `t`, `f`. \n\nFields for daily bars: `id`, `t`, `o`, `h`, `l`, `c`, `v`.\n",
                         "schema": {
                             "type": "object",
                             "required": [
@@ -1122,12 +1163,13 @@
                                     "type": "number"
                                 },
                                 "f": {
-                                    "description": "Type (ask or bid, daily bar). Do not add 'f' for trades.",
+                                    "description": "Type (a - ask, b - bid, t - trade, d - daily bar). Default value is `t` (trade).",
                                     "type": "string",
                                     "enum": [
                                         "a",
                                         "b",
-                                        "d"
+                                        "d",
+                                        "t"
                                     ]
                                 },
                                 "o": {
@@ -1164,6 +1206,86 @@
                 "ok",
                 "error"
             ]
+        },
+        "AuthorizationResponse": {
+            "description": "Authorization Response",
+            "type": "object",
+            "required": [
+                "access_token",
+                "expiration"
+            ],
+            "properties": {
+                "access_token": {
+                    "description": "Access token that acts as a session ID that the application uses for making requests. This token should be protected as though it were user credentials.",
+                    "type": "string"
+                },
+                "expiration": {
+                    "description": "Time when the token is expired represented as the number of seconds since the Unix epoch (00:00:00 UTC on 1 January 1970).",
+                    "type": "number"
+                }
+            }
+        },
+        "ConfigResponse": {
+            "type": "object",
+            "properties": {
+                "accountManager": {
+                    "type": "array",
+                    "description": "Localized account manager tables configuration",
+                    "items": {
+                        "$ref": "#/definitions/AccountManagerTable"
+                    }
+                },
+                "durations": {
+                    "type": "array",
+                    "description": "Localized array of durations displayed in Order Ticket",
+                    "items": {
+                        "$ref": "#/definitions/Duration"
+                    }
+                }
+            }
+        },
+        "AccountResponse": {
+            "type": "object",
+            "properties": {
+                "accounts": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Account"
+                    }
+                }
+            }
+        },
+        "AccountStateResponse": {
+            "type": "object",
+            "required": [
+                "balance",
+                "unrealizedPl"
+            ],
+            "properties": {
+                "balance": {
+                    "description": "Account Balance",
+                    "type": "number"
+                },
+                "unrealizedPl": {
+                    "description": "Unrealized Profit/loss",
+                    "type": "number"
+                },
+                "amData": {
+                    "description": "Account Manager data. Each element of this array is a table.",
+                    "type": "array",
+                    "items": {
+                        "description": "Single Account Manager table data. Each element of this array is a table raw.",
+                        "type": "array",
+                        "items": {
+                            "description": "Account Manager table raw data. Each element of this array is a table cell.",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
         },
         "Duration": {
             "description": "Single duration option",
@@ -1276,6 +1398,10 @@
                     "description": "Renames Amount to Quantity in the Order Ticket",
                     "type": "boolean"
                 },
+                "supportDOME": {
+                    "description": "Whether you want for DOM widget to be available.",
+                    "type": "boolean"
+                },
                 "supportBrackets": {
                     "description": "Whether you support brackets",
                     "type": "boolean"
@@ -1284,16 +1410,12 @@
                     "description": "Whether you support native closing of a position",
                     "type": "boolean"
                 },
-                "supportDOME": {
-                    "description": "Whether you want for DOM widget to be available.",
-                    "type": "boolean"
-                },
                 "supportEditAmount": {
                     "description": "Whether you support editing orders quantity",
                     "type": "boolean"
                 },
                 "supportLevel2Data": {
-                    "description": "Whether you support Level 2 data. It is required to display DOM levels. You must implement `\\streaming` to display DOM.",
+                    "description": "Whether you support Level 2 data. It is required to display DOM levels. You must implement `/streaming` to display DOM.",
                     "type": "boolean"
                 },
                 "supportMultiposition": {
@@ -1314,6 +1436,10 @@
                 },
                 "supportStopLimitOrders": {
                     "description": "Whether you support StopLimit orders.",
+                    "type": "boolean"
+                },
+                "supportOrdersHistory": {
+                    "description": "Whether you support /ordersHistory request.",
                     "type": "boolean"
                 }
             }
@@ -1399,6 +1525,22 @@
                         "stoplimit"
                     ]
                 },
+                "filledQty": {
+                    "description": "Filled quantity.",
+                    "type": "number"
+                },
+                "parentId": {
+                    "description": "Identified of parent order or parent position (for position brackets) depending on parentType. Should be set for bracket orders.",
+                    "type": "string"
+                },
+                "parentType": {
+                    "description": "Type of order parent. Should be set for bracket orders.",
+                    "type": "string",
+                    "enum": [
+                        "order",
+                        "position"
+                    ]
+                },
                 "duration": {
                     "description": "Expiration type and UNIX timestamp date/time",
                     "type": "object",
@@ -1411,7 +1553,7 @@
                             "type": "string"
                         },
                         "datetime": {
-                            "description": "Unit timestamp (GMT)",
+                            "description": "Unit timestamp (UTC)",
                             "type": "number"
                         }
                     }
@@ -1462,6 +1604,12 @@
                 "avgPrice": {
                     "description": "Average price of position trades",
                     "type": "number"
+                },
+                "unrealizedPl": {
+                    "description": "Unrealized (open) profit/loss."
+                },
+                "realizedPl": {
+                    "description": "Realized profit/loss for this instrument."
                 }
             }
         },
