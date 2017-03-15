@@ -3,7 +3,7 @@
     "info": {
         "version": "v1",
         "title": "TradingView Broker API",
-        "description": "This documentation describes REST API that is a single solution to integrate Trading Platform to Broker website and Broker to TradingView.com.\n\nAdditional information that Broker should provide to TradingView to integrate a Broker to TradingView.com:\n  - SVG logo, logo preferred size\n  - Does Broker use TV symbology or support mapping\n  - Does Broker use TV data or support history / streaming requests\n  - List of instrument groups (optional)\n  \n**ETag**\n\nThe REST API supports ETag on all GET requests. Usage of ETags will result in reduced data traffic and reduced latency.\n\nUsing ETag\n\nResponses to successful GET requests will include the ETag header. This ETag value is a hash of the response body. Save this value if the GET request will be repeated.\nWhen making the same GET request, include the `If-None-Match` header with the ETag value saved from the previous GET response.\nIf the data has not changed, HTTP code `304` is returned with no response body.\nIf data has changed, the response is returned as usual. A new ETag value is returned and this should be saved for future calls.\n"
+        "description": "This documentation describes the TradingView REST API, which was developed for brokers that wish to take advantage of TradingView. Whether you license our [standalone Trading Terminal](https://www.tradingview.com/trading-terminal/) or wish to be supported in the Trading Panel on the [main TradingView Web Platform](http://www.tradingview.com/chart), this is the only documentation you will need. \n\nThe Trading Terminal is a paid standalone B2B product that can be licensed to an individual company. Being supported on the TradingView Web Platform will require paid certification and monthly maintenance fees. Once you pick an option (or maybe choose both), use the REST API to build your bridge from your backend into our system to enable data flow and order execution. \n\nReach out to [founders@tradingview.com](founders@tradingview.com) with any questions, we’ll be happy to help. \n\nTo be supported on the Web Platform, you will also need to:\n  - Provide a logo in SVG vector format\n  - Let us know if you support TradingView symbology / support mapping\n  - Let us know if you support TradingView data or support history / streaming requests\n\n**ETag**\n\nThe REST API supports ETag on all GET requests. Usage of ETags will result in reduced data traffic and reduced latency.\n\nUsing ETag\n\nResponses to successful GET requests will include the ETag header. This ETag value is a hash of the response body. Save this value if the GET request will be repeated.\nWhen making the same GET request, include the `If-None-Match` header with the ETag value saved from the previous GET response.\nIf the data has not changed, HTTP code `304` is returned with no response body.\nIf the data has changed, the response is returned as usual. A new ETag value is returned and this should be saved for future calls.\n"
     },
     "host": "api.broker.com",
     "basePath": "/tradingview/v1",
@@ -77,7 +77,7 @@
         "countback": {
             "name": "countback",
             "in": "query",
-            "description": "Number of bars (higher priority than from). Trading Platform will never use it.",
+            "description": "Number of bars (higher priority than from). Trading Terminal will never use it.",
             "type": "number"
         },
         "locale": {
@@ -135,15 +135,15 @@
     "tags": [
         {
             "name": "site-trading-and-data",
-            "description": "Integration of Broker trading and data to TradingView.com"
+            "description": "Integration of data and execution into the TradingView Web Platform"
         },
         {
             "name": "site-trading-only",
-            "description": "Integration of a Broker to TradingView.com when charts data is already available"
+            "description": "Integration of only execution into the TradingView Web Platform, i.e. when data is already available"
         },
         {
-            "name": "platform",
-            "description": "Trading Platform integration."
+            "name": "terminal",
+            "description": "Trading Terminal data and execution integration"
         }
     ],
     "paths": {
@@ -199,7 +199,7 @@
                 "tags": [
                     "site-trading-and-data",
                     "site-trading-only",
-                    "platform"
+                    "terminal"
                 ],
                 "security": [
                     {
@@ -241,7 +241,7 @@
                 "tags": [
                     "site-trading-and-data",
                     "site-trading-only",
-                    "platform"
+                    "terminal"
                 ],
                 "security": [
                     {
@@ -281,7 +281,7 @@
                 "tags": [
                     "site-trading-and-data",
                     "site-trading-only",
-                    "platform"
+                    "terminal"
                 ],
                 "security": [
                     {
@@ -326,7 +326,7 @@
                 "tags": [
                     "site-trading-and-data",
                     "site-trading-only",
-                    "platform"
+                    "terminal"
                 ],
                 "security": [
                     {
@@ -369,7 +369,7 @@
                 "tags": [
                     "site-trading-and-data",
                     "site-trading-only",
-                    "platform"
+                    "terminal"
                 ],
                 "security": [
                     {
@@ -490,14 +490,14 @@
                 "tags": [
                     "site-trading-and-data",
                     "site-trading-only",
-                    "platform"
+                    "terminal"
                 ],
                 "security": [
                     {
                         "oauth": []
                     }
                 ],
-                "description": "Get orders history for an account. It is expected that returned orders will have a final status (rejected, filled, canceled).",
+                "description": "Get order history for an account. It is expected that returned orders will have a final status (rejected, filled, canceled).",
                 "parameters": [
                     {
                         "$ref": "#/parameters/account-id"
@@ -541,7 +541,7 @@
                 "tags": [
                     "site-trading-and-data",
                     "site-trading-only",
-                    "platform"
+                    "terminal"
                 ],
                 "security": [
                     {
@@ -584,14 +584,14 @@
                 "tags": [
                     "site-trading-and-data",
                     "site-trading-only",
-                    "platform"
+                    "terminal"
                 ],
                 "security": [
                     {
                         "oauth": []
                     }
                 ],
-                "description": "Modify an existing order.",
+                "description": "Modify an existing order",
                 "parameters": [
                     {
                         "$ref": "#/parameters/account-id"
@@ -640,14 +640,14 @@
                 "tags": [
                     "site-trading-and-data",
                     "site-trading-only",
-                    "platform"
+                    "terminal"
                 ],
                 "security": [
                     {
                         "oauth": []
                     }
                 ],
-                "description": "Cancel an existing order.",
+                "description": "Cancel an existing order",
                 "parameters": [
                     {
                         "$ref": "#/parameters/account-id"
@@ -668,14 +668,14 @@
                 "tags": [
                     "site-trading-and-data",
                     "site-trading-only",
-                    "platform"
+                    "terminal"
                 ],
                 "security": [
                     {
                         "oauth": []
                     }
                 ],
-                "description": "Get positions for an account.",
+                "description": "Get positions for an account",
                 "parameters": [
                     {
                         "$ref": "#/parameters/account-id"
@@ -713,14 +713,14 @@
                 "tags": [
                     "site-trading-and-data",
                     "site-trading-only",
-                    "platform"
+                    "terminal"
                 ],
                 "security": [
                     {
                         "oauth": []
                     }
                 ],
-                "description": "Get a position for an account.",
+                "description": "Get a position for an account",
                 "parameters": [
                     {
                         "$ref": "#/parameters/account-id"
@@ -756,14 +756,14 @@
                 "tags": [
                     "site-trading-and-data",
                     "site-trading-only",
-                    "platform"
+                    "terminal"
                 ],
                 "security": [
                     {
                         "oauth": []
                     }
                 ],
-                "description": "Modify an existing position stop loss or take profit or both.",
+                "description": "Modify an existing position stop loss or take profit or both",
                 "parameters": [
                     {
                         "$ref": "#/parameters/account-id"
@@ -794,14 +794,14 @@
                 "tags": [
                     "site-trading-and-data",
                     "site-trading-only",
-                    "platform"
+                    "terminal"
                 ],
                 "security": [
                     {
                         "oauth": []
                     }
                 ],
-                "description": "Close an existing position.",
+                "description": "Close an existing position",
                 "parameters": [
                     {
                         "$ref": "#/parameters/account-id"
@@ -822,14 +822,14 @@
                 "tags": [
                     "site-trading-and-data",
                     "site-trading-only",
-                    "platform"
+                    "terminal"
                 ],
                 "security": [
                     {
                         "oauth": []
                     }
                 ],
-                "description": "Get a list of executions (i.e. fills or trades) for an account and an instrument. Executions are displayed on a chart.",
+                "description": "Get a list of executions (i.e. fills or trades) for an account and an instrument. Executions are displayed on a chart",
                 "parameters": [
                     {
                         "$ref": "#/parameters/account-id"
@@ -880,14 +880,14 @@
                 "tags": [
                     "site-trading-and-data",
                     "site-trading-only",
-                    "platform"
+                    "terminal"
                 ],
                 "security": [
                     {
                         "oauth": []
                     }
                 ],
-                "description": "Get a list of tradeable instruments that are available for trading with the account specified.",
+                "description": "Get a list of tradeable instruments that are available for trading with the account specified",
                 "parameters": [
                     {
                         "$ref": "#/parameters/account-id"
@@ -895,7 +895,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "List of instruments.",
+                        "description": "List of instruments",
                         "schema": {
                             "type": "object",
                             "required": [
@@ -926,7 +926,7 @@
                     "site-trading-and-data",
                     "site-trading-only"
                 ],
-                "description": "Return all broker instruments with corresponding TradingView instruments. Required to add a Broker to TradingView.com. It is not required for Trading Platform integration. This request works without authorization!",
+                "description": "Return all broker instruments with corresponding TradingView instruments. It is required to add a Broker to TradingView.com. It is not required for Trading Terminal integration. This request works without authorization!",
                 "responses": {
                     "200": {
                         "description": "Broker - TradingView instruments map",
@@ -941,14 +941,14 @@
             "get": {
                 "tags": [
                     "site-trading-and-data",
-                    "platform"
+                    "terminal"
                 ],
                 "security": [
                     {
                         "oauth": []
                     }
                 ],
-                "description": "Get a list of all instruments of a specific group.",
+                "description": "Get a list of all instruments of a specific group",
                 "parameters": [
                     {
                         "name": "group",
@@ -960,7 +960,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "List of instruments.",
+                        "description": "List of instruments",
                         "schema": {
                             "$ref": "#/definitions/SymbolInfoArrays"
                         }
@@ -972,7 +972,7 @@
             "get": {
                 "tags": [
                     "site-trading-and-data",
-                    "platform"
+                    "terminal"
                 ],
                 "security": [
                     {
@@ -999,7 +999,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Response is expected to be an object with properties listed below. Each property is treated as a table column.",
+                        "description": "Response is expected to be an object with properties listed below. Each property is treated as a table column",
                         "schema": {
                             "$ref": "#/definitions/BarsArrays"
                         }
@@ -1010,14 +1010,14 @@
         "/marks": {
             "get": {
                 "tags": [
-                    "platform"
+                    "terminal"
                 ],
                 "security": [
                     {
                         "oauth": []
                     }
                 ],
-                "description": "Request for bar marks (circles on top of bars). You can display custom marks only in the Trading Platform.",
+                "description": "Request for bar marks (circles on top of bars). You can display custom marks only in the Trading Terminal",
                 "parameters": [
                     {
                         "$ref": "#/parameters/symbol"
@@ -1034,7 +1034,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Response is expected to be an object with properties listed below. Each property is an array.",
+                        "description": "Response is expected to be an object with properties listed below. Each property is an array",
                         "schema": {
                             "$ref": "#/definitions/MarksArrays"
                         }
@@ -1045,14 +1045,14 @@
         "/timescale_marks": {
             "get": {
                 "tags": [
-                    "platform"
+                    "terminal"
                 ],
                 "security": [
                     {
                         "oauth": []
                     }
                 ],
-                "description": "Request for timescale marks (circles on the timescale). You can display custom marks only in the Trading Platform.",
+                "description": "Request for timescale marks (circles on the timescale). You can display custom marks only in the Trading Terminal",
                 "parameters": [
                     {
                         "$ref": "#/parameters/symbol"
@@ -1069,7 +1069,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Response is expected to be an object with properties listed below. Each property is an array.",
+                        "description": "Response is expected to be an object with properties listed below. Each property is an array",
                         "schema": {
                             "$ref": "#/definitions/TimescaleMarksArrays"
                         }
@@ -1082,7 +1082,7 @@
                 "tags": [
                     "site-trading-and-data",
                     "site-trading-only",
-                    "platform"
+                    "terminal"
                 ],
                 "security": [
                     {
@@ -1145,7 +1145,7 @@
                 "description": "Stream of prices. Server constantly keeps the connection alive. If the connection is broken the server constantly tries to restore it. Transfer mode is 'chunked encoding'. The data feed should set 'Transfer-Encoding: chunked' and make sure that all intermediate proxies are set to use this mode. All messages are finished with '\\r\\n'. Streaming data should contain real-time only. It shouldn't contain snapshots of data.",
                 "responses": {
                     "200": {
-                        "description": "Data feed should provide ticks (trades, asks, bids) and daily bars. \n\nIf there is no trades the data feed should set trades to bids. \n\nIf there is only ask/bid implementation you must also send trade (same as bid but it's size must be >= 1).\n\nSize for trades is always >= 1 except it is a correction. \n\nIn case of correction is can be 0. All times should be UNIX time UTC. \n\nDaily bars are required if they cannot be built from ticks (has_dwm should be set to true in the symbol information). \n\nFields for asks, bids and trades: `id`, `p`, `s` (optional for asks and bids), `t`, `f`. \n\nFields for daily bars: `id`, `t`, `o`, `h`, `l`, `c`, `v`.\n",
+                        "description": "Data feed should provide ticks (trades, asks, bids) and daily bars. \n\nIf there is no trades the data feed should set trades to bids. \n\nIf there is only ask/bid implementation you must also set the trade (same as bid but it's size must be >= 1).\n\nSize for trades is always >= 1 except for a correction. \n\nIn case of correction is can be 0. All times should be UNIX time UTC. \n\nDaily bars are required if they cannot be built from ticks (has_dwm should be set to true in the symbol information). \n\nFields for asks, bids and trades: `id`, `p`, `s` (optional for asks and bids), `t`, `f`. \n\nFields for daily bars: `id`, `t`, `o`, `h`, `l`, `c`, `v`.\n",
                         "schema": {
                             "type": "object",
                             "required": [
@@ -1223,11 +1223,11 @@
             ],
             "properties": {
                 "access_token": {
-                    "description": "Access token that acts as a session ID that the application uses for making requests. This token should be protected as though it were user credentials.",
+                    "description": "Access token acts as a session ID that the application uses for making requests. This token should be protected as if it were user credentials",
                     "type": "string"
                 },
                 "expiration": {
-                    "description": "Time when the token is expired represented as the number of seconds since the Unix epoch (00:00:00 UTC on 1 January 1970).",
+                    "description": "The time when the token is expired is represented as the number of seconds since the Unix epoch (00:00:00 UTC on 1 January 1970)",
                     "type": "number"
                 }
             }
@@ -1237,7 +1237,7 @@
             "properties": {
                 "accountManager": {
                     "type": "array",
-                    "description": "Localized account manager tables configuration",
+                    "description": "Localized account manager's tables configuration",
                     "items": {
                         "$ref": "#/definitions/AccountManagerTable"
                     }
@@ -1270,10 +1270,10 @@
                     "description": "Account Manager data. Each element of this array is a table.",
                     "type": "array",
                     "items": {
-                        "description": "Single Account Manager table data. Each element of this array is a table raw.",
+                        "description": "Single Account Manager table data. Each element of this array is a table raw",
                         "type": "array",
                         "items": {
-                            "description": "Account Manager table raw data. Each element of this array is a table cell.",
+                            "description": "Account Manager table raw data. Each element of this array is a table cell",
                             "type": "array",
                             "items": {
                                 "type": "string"
@@ -1379,7 +1379,7 @@
                     "type": "string"
                 },
                 "currencySign": {
-                    "description": "Sign of account currency",
+                    "description": "Account currency symbol",
                     "type": "string"
                 },
                 "config": {
@@ -1394,8 +1394,8 @@
                     "description": "Renames Amount to Quantity in the Order Ticket",
                     "type": "boolean"
                 },
-                "supportDOME": {
-                    "description": "Whether you want for DOM widget to be available.",
+                "supportDOM": {
+                    "description": "Whether you want for DOM widget to be available",
                     "type": "boolean"
                 },
                 "supportBrackets": {
@@ -1415,27 +1415,27 @@
                     "type": "boolean"
                 },
                 "supportMultiposition": {
-                    "description": "Whether you support multiple positions at the same time.",
+                    "description": "Whether you support multiple positions at the same time",
                     "type": "boolean"
                 },
                 "supportPLUpdate": {
-                    "description": "Whether you provide unrealizedPl for positions. Otherwise PL will be calculated automatically based on a simple algorithm.",
+                    "description": "Whether you provide `unrealizedPl` for positions. Otherwise P&L will be calculated automatically based on a simple algorithm",
                     "type": "boolean"
                 },
                 "supportReducePosition": {
-                    "description": "Reserved for future use.",
+                    "description": "Reserved for future use",
                     "type": "boolean"
                 },
                 "supportReversePosition": {
-                    "description": "Whether you support reverse position by placing an opposite order.",
+                    "description": "Whether you support reverse position by placing an opposite order",
                     "type": "boolean"
                 },
                 "supportStopLimitOrders": {
-                    "description": "Whether you support StopLimit orders.",
+                    "description": "Whether you support StopLimit orders",
                     "type": "boolean"
                 },
                 "supportOrdersHistory": {
-                    "description": "Whether you support /ordersHistory request.",
+                    "description": "Whether you support /ordersHistory request",
                     "type": "boolean"
                 }
             }
@@ -1448,7 +1448,7 @@
             ],
             "properties": {
                 "name": {
-                    "description": "Broker instrument name.",
+                    "description": "Broker instrument name",
                     "type": "string"
                 },
                 "description": {
@@ -1496,7 +1496,7 @@
                     "type": "string"
                 },
                 "instrument": {
-                    "description": "Instrument name that is used on a broker side.",
+                    "description": "Instrument name that is used on a broker's side",
                     "type": "string"
                 },
                 "qty": {
@@ -1555,7 +1555,7 @@
                     }
                 },
                 "status": {
-                    "description": "String constants to describe an order status.\n\n`Status`    | Description \n----------|-------------\npending \t| order is not created on a broker side yet \ninactive \t| bracket order is created but waiting for a base order to be filled \nworking\t| order is created but not executed yet \nrejected\t| order is rejected for some reason \nfilled\t| order is fully executed \ncanceled\t| order is canceled \n",
+                    "description": "String constants to describe an order status.\n\n`Status`    | Description \n----------|-------------\npending \t| order is not created on a broker's side yet \ninactive \t| bracket order is created but waiting for a base order to be filled \nworking\t| order is created but not executed yet \nrejected\t| order is rejected for some reason \nfilled\t| order is fully executed \ncanceled\t| order is canceled \n",
                     "type": "string",
                     "enum": [
                         "pending",
@@ -1582,7 +1582,7 @@
                     "type": "string"
                 },
                 "instrument": {
-                    "description": "Instrument name that is used on a broker side.",
+                    "description": "Instrument name that is used on a broker's side",
                     "type": "string"
                 },
                 "qty": {
@@ -1602,10 +1602,10 @@
                     "type": "number"
                 },
                 "unrealizedPl": {
-                    "description": "Unrealized (open) profit/loss."
+                    "description": "Unrealized (open) profit/loss"
                 },
                 "realizedPl": {
-                    "description": "Realized profit/loss for this instrument."
+                    "description": "Realized profit/loss for this instrument"
                 }
             }
         },
@@ -1674,14 +1674,14 @@
                     }
                 },
                 "exchange-listed": {
-                    "description": "Short name of exchange where this symbol is listed.",
+                    "description": "Short name of exchange where this symbol is listed",
                     "type": "array",
                     "items": {
                         "type": "string"
                     }
                 },
                 "exchange-traded": {
-                    "description": "Short name of exchange where this symbol is traded.",
+                    "description": "Short name of exchange where this symbol is traded",
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -1695,7 +1695,7 @@
                     }
                 },
                 "minmov2": {
-                    "description": "It's a number for complex price formatting cases.",
+                    "description": "It's a number for complex price formatting cases",
                     "type": "array",
                     "items": {
                         "type": "number"
@@ -1723,7 +1723,7 @@
                     }
                 },
                 "has-no-volume": {
-                    "description": "Boolean showing whether symbol has volume data or not.",
+                    "description": "Boolean showing whether symbol has volume data or not",
                     "type": "array",
                     "items": {
                         "type": "boolean"
@@ -1744,7 +1744,7 @@
                     }
                 },
                 "timezone": {
-                    "description": "Exchange timezone for this symbol. We expect to get name of time zone in olsondb format.",
+                    "description": "Exchange timezone for this symbol. We expect to get name of time zone in olsondb format",
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -1861,7 +1861,7 @@
                     "type": "number"
                 },
                 "t": {
-                    "description": "bar time, unix timestamp (UTC). Daily bars should have only date part, time should be 0.",
+                    "description": "bar time, unix timestamp (UTC). Daily bars should only have the date part, time should be 0.",
                     "type": "array",
                     "items": {
                         "type": "number"
@@ -1921,7 +1921,7 @@
                     }
                 },
                 "time": {
-                    "description": "bar time, unix timestamp (UTC).",
+                    "description": "bar time, unix timestamp (UTC)",
                     "type": "array",
                     "items": {
                         "type": "number"
@@ -1986,14 +1986,14 @@
             ],
             "properties": {
                 "id": {
-                    "description": "Unique identifiers of marks.",
+                    "description": "Unique identifiers of marks",
                     "type": "array",
                     "items": {
                         "type": "number"
                     }
                 },
                 "time": {
-                    "description": "bar time, unix timestamp (UTC).",
+                    "description": "bar time, unix timestamp (UTC)",
                     "type": "array",
                     "items": {
                         "type": "number"
