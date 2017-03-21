@@ -6,11 +6,12 @@
   <title>Swagger UI</title>
   <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
   <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
+
   <link href='css/typography.css' media='screen' rel='stylesheet' type='text/css'/>
   <link href='css/reset.css' media='screen' rel='stylesheet' type='text/css'/>
   <link href='css/screen.css' media='screen' rel='stylesheet' type='text/css'/>
-  <link href='css/reset.css' media='print' rel='stylesheet' type='text/css'/>
   <link href='css/print.css' media='print' rel='stylesheet' type='text/css'/>
+  <link href='css/custom.css' rel='stylesheet' type='text/css'/>
 
   <script src='lib/object-assign-pollyfill.js' type='text/javascript'></script>
   <script src='lib/jquery-1.8.0.min.js' type='text/javascript'></script>
@@ -33,66 +34,87 @@
   <!-- <script src='lang/en.js' type='text/javascript'></script> -->
 
   <script type="text/javascript">
-    $(function () {
-      var url = "http://tradingview.github.io/restapi/swagger.json";
+	  $(function () {
+		  var url = "http://tradingview.github.io/restapi/swagger.json";
 
-      hljs.configure({
-        highlightSizeThreshold: 5000
-      });
+		  hljs.configure({
+			  highlightSizeThreshold: 5000
+		  });
 
-      // Pre load translate...
-      if(window.SwaggerTranslator) {
-        window.SwaggerTranslator.translate();
-      }
-      window.swaggerUi = new SwaggerUi({
-        url: url,
-        dom_id: "swagger-ui-container",
-        supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
-        onComplete: function(swaggerApi, swaggerUi){
-          if(typeof initOAuth == "function") {
-            initOAuth({
-              clientId: "your-client-id",
-              clientSecret: "your-client-secret-if-required",
-              realm: "your-realms",
-              appName: "your-app-name",
-              scopeSeparator: " ",
-              additionalQueryStringParams: {}
-            });
-          }
+		  // Pre load translate...
+		  if(window.SwaggerTranslator) {
+			  window.SwaggerTranslator.translate();
+		  }
+		  window.swaggerUi = new SwaggerUi({
+			  url: url,
+			  dom_id: "swagger-ui-container",
+			  supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
+			  onComplete: function(swaggerApi, swaggerUi){
+				  if(typeof initOAuth == "function") {
+					  initOAuth({
+						  clientId: "your-client-id",
+						  clientSecret: "your-client-secret-if-required",
+						  realm: "your-realms",
+						  appName: "your-app-name",
+						  scopeSeparator: " ",
+						  additionalQueryStringParams: {}
+					  });
+				  }
 
-          if(window.SwaggerTranslator) {
-            window.SwaggerTranslator.translate();
-          }
-        },
-        onFailure: function(data) {
-          log("Unable to Load SwaggerUI");
-        },
-        docExpansion: "none",
-        jsonEditor: false,
-        defaultModelRendering: 'schema',
-        showRequestHeaders: false,
-        showOperationIds: false
-      });
+				  if(window.SwaggerTranslator) {
+					  window.SwaggerTranslator.translate();
+				  }
 
-      window.swaggerUi.load();
+				  document.querySelector('.js-footer').style.position = 'relative';
+				  var tryItOutButtons = document.querySelectorAll('.sandbox_header');
+				  for (var i = 0; i < tryItOutButtons.length; i++) {
+					  tryItOutButtons[i].style.display = 'none';
+				  }
+			  },
+			  onFailure: function(data) {
+				  log("Unable to Load SwaggerUI");
+			  },
+			  docExpansion: "none",
+			  jsonEditor: false,
+			  defaultModelRendering: 'schema',
+			  showRequestHeaders: false,
+			  showOperationIds: false
+		  });
 
-      function log() {
-        if ('console' in window) {
-          console.log.apply(console, arguments);
-        }
-      }
-  });
+		  window.swaggerUi.load();
+
+		  function log() {
+			  if ('console' in window) {
+				  console.log.apply(console, arguments);
+			  }
+		  }
+	  });
   </script>
 </head>
 
 <body class="swagger-section">
-<div id='header'>
-  <div class="swagger-ui-wrap">
-    <a id="logo" href="http://swagger.io"><img class="logo__img" alt="swagger" height="30" width="30" src="images/logo_small.png" /><span class="logo__title">swagger</span></a>    
+<header class="header">
+  <div class="header__wrap">
+    <div class="header__logo-wrap">
+      <a href="/">
+          <span class="header__logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 14" height="14" width="22"><path d="M6.57 6.028c0-.79.642-1.433 1.433-1.433.792 0 1.433.642 1.433 1.433 0 .166-.03.325-.082.474l3.354 3.87c.164-.06.34-.095.525-.095.128 0 .252.017.37.048l5.043-5.47c-.91-1.078-2.247-1.783-3.75-1.856-1.058-1.452-2.77-2.396-4.703-2.396-3.033 0-5.523 2.323-5.79 5.286-.112-.01-.225-.015-.338-.015C1.82 5.875 0 7.695 0 9.94c0 .722.19 1.4.52 1.988L6.59 6.25c-.012-.073-.02-.147-.02-.222zM19.89 8.23c0-.52-.078-1.02-.22-1.495l-4.992 4.616c.04.138.064.283.064.434 0 .832-.675 1.507-1.507 1.507-.833 0-1.507-.674-1.507-1.506 0-.177.03-.345.087-.502L8.477 7.38c-.15.05-.307.08-.474.08-.142 0-.28-.02-.41-.06L1.03 12.645C1.777 13.48 2.86 14 4.066 14h14.992C20.683 14 22 12.68 22 11.055c0-1.337-.89-2.465-2.112-2.824" fill="#3BB3E4"/></svg>
+          </span>
+        <span class="header__title">Trading View</span>
+      </a>
+    </div>
   </div>
-</div>
+</header>
 
 <div id="message-bar" class="swagger-ui-wrap" data-sw-translate>&nbsp;</div>
 <div id="swagger-ui-container" class="swagger-ui-wrap"></div>
+
+<footer class="tv-footer js-footer" style="position: absolute;">
+  <div class="tv-footer__wrap">
+    <div class="tv-footer__copyright">
+      <span class="tv-footer__copyright--copy-text">(c) 2017 TradingView</span>
+    </div>
+  </div>
+</footer>
 </body>
 </html>
