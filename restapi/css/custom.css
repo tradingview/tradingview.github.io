@@ -11,8 +11,28 @@ body {
     padding-top: 55px;
 }
 
-a, a:visited, a:active {
+a, a:visited, a:active, .swagger-section .swagger-ui-wrap a {
     text-decoration: none;
+    color: #3bb3e4;
+}
+
+h1, h2, h3, h4 {
+    color: #666!important;
+    font-weight: 600!important;
+}
+
+.info h3 {
+    font-size: 18px!important;;
+}
+
+.info h4 {
+    font-size: 16px!important;
+    padding: 10px 0;
+}
+
+p {
+    line-height: 22px!important;
+    font-size: 14px!important;
 }
 
 .header {
@@ -32,7 +52,7 @@ a, a:visited, a:active {
 
 
 .header__logo {
-    margin: 20px 0 0 10px;
+    margin: 20px 0 0 -35px;
     display: inline-block;
 }
 
@@ -53,6 +73,7 @@ a, a:visited, a:active {
     left: 0;
     padding: 1rem;
     position: fixed;
+    min-width: 800px;
 }
 
 .tv-footer__wrap {
@@ -63,9 +84,4 @@ a, a:visited, a:active {
 
 .tv-footer__copyright--copy-text {
     color: #9fa4a9;
-}
-
-p {
-    line-height: 22px!important;
-    font-size: 14px!important;
 }
