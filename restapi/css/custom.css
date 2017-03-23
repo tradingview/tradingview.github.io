@@ -52,7 +52,7 @@ p {
 
 
 .header__logo {
-    margin: 20px 0 0 -35px;
+    margin: 20px 0 0 0;
     display: inline-block;
 }
 
@@ -84,4 +84,8 @@ p {
 
 .tv-footer__copyright--copy-text {
     color: #9fa4a9;
+}
+
+.info_title, #overview {
+    margin-left: -1px;
 }
