@@ -21,6 +21,11 @@ h1, h2, h3, h4 {
     font-weight: 600!important;
 }
 
+h2 a {
+    text-decoration: none;
+    color: #4a4a4a!important;
+}
+
 .info h3 {
     font-size: 18px!important;
 }
