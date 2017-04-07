@@ -1237,7 +1237,7 @@
             "properties": {
                 "accountManager": {
                     "type": "array",
-                    "description": "Localized account manager's tables configuration",
+                    "description": "Localized account manager's tables configuration. Account Manager is a page in the bottom widget. This page can have multiple tables. Data of the tables is filled using `/state` response.",
                     "items": {
                         "$ref": "#/definitions/AccountManagerTable"
                     }
@@ -1267,7 +1267,7 @@
                     "type": "number"
                 },
                 "amData": {
-                    "description": "Account Manager data. Each element of this array is a table.",
+                    "description": "Account Manager data. Structure of Account Manager is defined by `/config` response. Each element of this array is a table.",
                     "type": "array",
                     "items": {
                         "description": "Single Account Manager table data. Each element of this array is a table raw",
