@@ -3,7 +3,7 @@
     "info": {
         "version": "v1",
         "title": "TradingView Broker API",
-        "description": "# Overview\nThis documentation describes the TradingView REST API, which was developed for brokers that wish to take advantage of TradingView. Whether you license our [standalone Trading Terminal](https://www.tradingview.com/trading-terminal/) or wish to be supported in the Trading Panel on the [main TradingView Web Platform](http://www.tradingview.com/chart), this is the only documentation you will need. \n\nThe Trading Terminal is a paid standalone B2B product that can be licensed to an individual company. Being supported on the TradingView Web Platform will require paid certification and monthly maintenance fees. Once you pick an option (or maybe choose both), use the REST API to build your bridge from your backend into our system to enable data flow and order execution. \n\nReach out to [founders@tradingview.com](mailto:founders@tradingview.com) with any questions, we’ll be happy to help. \n\nTo be supported on the Web Platform, you will also need to:\n  - Provide a logo in SVG vector format.\n  - Let us know if you support TradingView symbology / support mapping.\n  - Let us know if you support TradingView data or support history / streaming requests.\n\n### ETag\n\nThe REST API supports ETag on all GET requests. Usage of ETags will result in reduced data traffic and reduced latency.\n\n#### Using ETag\n\nResponses to successful GET requests will include the ETag header. This ETag value is a hash of the response body. Save this value if the GET request will be repeated.\nWhen making the same GET request, include the `If-None-Match` header with the ETag value saved from the previous GET response.\nIf the data has not changed, HTTP code `304` is returned with no response body.\nIf the data has changed, the response is returned as usual. A new ETag value is returned and this should be saved for future calls.\n"
+        "description": "# Overview\nThis documentation describes the TradingView REST API, which was developed for brokers that wish to take advantage of TradingView. Whether you license our [standalone Trading Terminal](https://www.tradingview.com/trading-terminal/) or wish to be supported in the Trading Panel on the [main TradingView Web Platform](http://www.tradingview.com/chart), this is the only documentation you will need. \n\nThe Trading Terminal is a paid standalone B2B product that can be licensed to an individual company. Being supported on the TradingView Web Platform will require paid certification and monthly maintenance fees. Once you pick an option (or maybe choose both), use the REST API to build your bridge from your backend into our system to enable data flow and order execution. \n\nReach out to [founders@tradingview.com](mailto:founders@tradingview.com) with any questions, we’ll be happy to help. \n\nTo be supported on the Web Platform, you will also need to:\n  - Provide a logo in SVG vector format\n  - Let us know if you support TradingView symbology / support mapping\n  - Let us know if you support TradingView data or support history / streaming requests\n\n### ETag\n\nThe REST API supports ETag on all GET requests. Usage of ETags will result in reduced data traffic and reduced latency.\n\n#### Using ETag\n\nResponses to successful GET requests will include the ETag header. This ETag value is a hash of the response body. Save this value if the GET request will be repeated.\nWhen making the same GET request, include the `If-None-Match` header with the ETag value saved from the previous GET response.\nIf the data has not changed, HTTP code `304` is returned with no response body.\nIf the data has changed, the response is returned as usual. A new ETag value is returned and this should be saved for future calls.\n"
     },
     "host": "api.broker.com",
     "basePath": "/tradingview/v1",
@@ -25,22 +25,22 @@
         }
     },
     "parameters": {
-        "account-id": {
-            "name": "account-id",
+        "accountId": {
+            "name": "accountId",
             "in": "path",
             "description": "The account identifier",
             "type": "string",
             "required": true
         },
-        "order-id": {
-            "name": "order-id",
+        "orderId": {
+            "name": "orderId",
             "description": "Order ID",
             "in": "path",
             "type": "string",
             "required": true
         },
-        "position-id": {
-            "name": "position-id",
+        "positionId": {
+            "name": "positionId",
             "description": "Position ID",
             "in": "path",
             "type": "string",
@@ -276,7 +276,7 @@
                 }
             }
         },
-        "/accounts/{account-id}/state": {
+        "/accounts/{accountId}/state": {
             "get": {
                 "tags": [
                     "site-trading-and-data",
@@ -291,7 +291,7 @@
                 "description": "Get account information.",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/account-id"
+                        "$ref": "#/parameters/accountId"
                     },
                     {
                         "$ref": "#/parameters/locale"
@@ -321,7 +321,7 @@
                 }
             }
         },
-        "/accounts/{account-id}/orders": {
+        "/accounts/{accountId}/orders": {
             "get": {
                 "tags": [
                     "site-trading-and-data",
@@ -336,7 +336,7 @@
                 "description": "Get pending orders for an account.",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/account-id"
+                        "$ref": "#/parameters/accountId"
                     }
                 ],
                 "responses": {
@@ -379,7 +379,7 @@
                 "description": "Create a new order",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/account-id"
+                        "$ref": "#/parameters/accountId"
                     },
                     {
                         "name": "instrument",
@@ -485,7 +485,7 @@
                 }
             }
         },
-        "/accounts/{account-id}/ordersHistory": {
+        "/accounts/{accountId}/ordersHistory": {
             "get": {
                 "tags": [
                     "site-trading-and-data",
@@ -500,7 +500,7 @@
                 "description": "Get order history for an account. It is expected that returned orders will have a final status (rejected, filled, canceled).",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/account-id"
+                        "$ref": "#/parameters/accountId"
                     },
                     {
                         "name": "maxCount",
@@ -536,7 +536,7 @@
                 }
             }
         },
-        "/accounts/{account-id}/orders/{order-id}": {
+        "/accounts/{accountId}/orders/{orderId}": {
             "get": {
                 "tags": [
                     "site-trading-and-data",
@@ -551,10 +551,10 @@
                 "description": "Get an order for an account. It can be an active or historical order.",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/account-id"
+                        "$ref": "#/parameters/accountId"
                     },
                     {
-                        "$ref": "#/parameters/order-id"
+                        "$ref": "#/parameters/orderId"
                     }
                 ],
                 "responses": {
@@ -594,10 +594,10 @@
                 "description": "Modify an existing order",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/account-id"
+                        "$ref": "#/parameters/accountId"
                     },
                     {
-                        "$ref": "#/parameters/order-id"
+                        "$ref": "#/parameters/orderId"
                     },
                     {
                         "name": "qty",
@@ -650,10 +650,10 @@
                 "description": "Cancel an existing order",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/account-id"
+                        "$ref": "#/parameters/accountId"
                     },
                     {
-                        "$ref": "#/parameters/order-id"
+                        "$ref": "#/parameters/orderId"
                     }
                 ],
                 "responses": {
@@ -663,7 +663,7 @@
                 }
             }
         },
-        "/accounts/{account-id}/positions": {
+        "/accounts/{accountId}/positions": {
             "get": {
                 "tags": [
                     "site-trading-and-data",
@@ -678,7 +678,7 @@
                 "description": "Get positions for an account",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/account-id"
+                        "$ref": "#/parameters/accountId"
                     }
                 ],
                 "responses": {
@@ -708,7 +708,7 @@
                 }
             }
         },
-        "/accounts/{account-id}/positions/{position-id}": {
+        "/accounts/{accountId}/positions/{positionId}": {
             "get": {
                 "tags": [
                     "site-trading-and-data",
@@ -723,10 +723,10 @@
                 "description": "Get a position for an account",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/account-id"
+                        "$ref": "#/parameters/accountId"
                     },
                     {
-                        "$ref": "#/parameters/position-id"
+                        "$ref": "#/parameters/positionId"
                     }
                 ],
                 "responses": {
@@ -766,10 +766,10 @@
                 "description": "Modify an existing position stop loss or take profit or both",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/account-id"
+                        "$ref": "#/parameters/accountId"
                     },
                     {
-                        "$ref": "#/parameters/position-id"
+                        "$ref": "#/parameters/positionId"
                     },
                     {
                         "name": "stopLoss",
@@ -804,10 +804,10 @@
                 "description": "Close an existing position",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/account-id"
+                        "$ref": "#/parameters/accountId"
                     },
                     {
-                        "$ref": "#/parameters/position-id"
+                        "$ref": "#/parameters/positionId"
                     }
                 ],
                 "responses": {
@@ -817,7 +817,7 @@
                 }
             }
         },
-        "/accounts/{account-id}/executions": {
+        "/accounts/{accountId}/executions": {
             "get": {
                 "tags": [
                     "site-trading-and-data",
@@ -832,7 +832,7 @@
                 "description": "Get a list of executions (i.e. fills or trades) for an account and an instrument. Executions are displayed on a chart",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/account-id"
+                        "$ref": "#/parameters/accountId"
                     },
                     {
                         "name": "instrument",
@@ -875,7 +875,7 @@
                 }
             }
         },
-        "/accounts/{account-id}/instruments": {
+        "/accounts/{accountId}/instruments": {
             "get": {
                 "tags": [
                     "site-trading-and-data",
@@ -890,7 +890,7 @@
                 "description": "Get a list of tradeable instruments that are available for trading with the account specified",
                 "parameters": [
                     {
-                        "$ref": "#/parameters/account-id"
+                        "$ref": "#/parameters/accountId"
                     }
                 ],
                 "responses": {
