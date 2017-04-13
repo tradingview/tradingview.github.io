@@ -428,7 +428,7 @@
                     {
                         "name": "stopPrice",
                         "in": "formData",
-                        "description": "Limit Price for Limit or StopLimit order",
+                        "description": "Stop Price for Stop or StopLimit order",
                         "type": "number"
                     },
                     {
@@ -1525,6 +1525,18 @@
                     "description": "Filled quantity.",
                     "type": "number"
                 },
+                "avgPrice": {
+                    "description": "Average price of order fills. It should be provided for filled / partly filled orders.",
+                    "type": "number"
+                },
+                "limitPrice": {
+                    "description": "Limit Price for Limit or StopLimit order.",
+                    "type": "number"
+                },
+                "stopPrice": {
+                    "description": "Stop Price for Stop or StopLimit order.",
+                    "type": "number"
+                },
                 "parentId": {
                     "description": "Identified of parent order or parent position (for position brackets) depending on parentType. Should be set for bracket orders.",
                     "type": "string"
@@ -1555,7 +1567,7 @@
                     }
                 },
                 "status": {
-                    "description": "String constants to describe an order status.\n\n`Status`    | Description \n----------|-------------\npending \t| order is not created on a broker's side yet \ninactive \t| bracket order is created but waiting for a base order to be filled \nworking\t| order is created but not executed yet \nrejected\t| order is rejected for some reason \nfilled\t| order is fully executed \ncanceled\t| order is canceled \n",
+                    "description": "String constants to describe an order status.\n\n`Status`  | Description \n----------|-------------\npending \t| order is not created on a broker's side yet \ninactive \t| bracket order is created but waiting for a base order to be filled \nworking\t  | order is created but not executed yet \nrejected\t| order is rejected for some reason \nfilled\t  | order is fully executed \ncanceled\t| order is canceled \n",
                     "type": "string",
                     "enum": [
                         "pending",
