@@ -30,6 +30,10 @@ info:
     When making the same GET request, include the `If-None-Match` header with the ETag value saved from the previous GET response.
     If the data has not changed, HTTP code `304` is returned with no response body.
     If the data has changed, the response is returned as usual. A new ETag value is returned and this should be saved for future calls.
+    
+    ### Swagger
+    
+    This specification has been generaged using outstanding [Swagger](http://swagger.io) technology. Swagger will do most of the work for you. Download TradingView Swagger [specification](http://tradingview.github.io/restapi/swagger.yaml), Copy-Paste it into [Online Swagger Editor](http://editor.swagger.io/) and generate a server using of 1 of 26 frameworks.
 
 ################################################################################
 #                  Host, Base Path, Schemes and Content Types                  #
