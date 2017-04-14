@@ -837,14 +837,14 @@
                     {
                         "name": "instrument",
                         "description": "Broker instrument name",
-                        "in": "formData",
+                        "in": "query",
                         "type": "string",
                         "required": true
                     },
                     {
                         "name": "maxCount",
                         "description": "Maximum count of executions to return",
-                        "in": "formData",
+                        "in": "query",
                         "type": "number"
                     }
                 ],
@@ -948,16 +948,7 @@
                         "oauth": []
                     }
                 ],
-                "description": "Get a list of all instruments of a specific group",
-                "parameters": [
-                    {
-                        "name": "group",
-                        "in": "query",
-                        "description": "Group name (example, NYSE)",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
+                "description": "Get a list of all instruments",
                 "responses": {
                     "200": {
                         "description": "List of instruments",
