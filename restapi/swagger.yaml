@@ -465,7 +465,7 @@ paths:
         - $ref: '#/parameters/orderId'
         - name: qty
           in: formData
-          description: The number of units to open order for
+          description: Number of units
           type: number
         - name: limitPrice
           in: formData
@@ -473,7 +473,7 @@ paths:
           type: number
         - name: stopPrice
           in: formData
-          description: Limit Price for Limit or StopLimit order
+          description: Stop Price for Stop or StopLimit order
           type: number
         - name: stopLoss
           in: formData
