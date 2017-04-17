@@ -1504,11 +1504,7 @@ definitions:
       - v
     properties:
       s:
-        description: Status code for request
-        type: string
-        enum:
-          - ok
-          - error 
+        $ref: '#/definitions/Status'
       n:
         description: Symbol name. Should be equal to the requested one
         type: string
