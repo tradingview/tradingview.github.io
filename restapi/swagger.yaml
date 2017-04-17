@@ -766,11 +766,7 @@ paths:
             type: object
             properties:
               s: 
-                description: Status code for request
-                type: string
-                enum:
-                  - ok
-                  - error
+                $ref: '#/definitions/Status'
               errmsg:
                 description: Error message
                 type: string
@@ -1568,6 +1564,12 @@ definitions:
         items:
           $ref: '#/definitions/SingleField'
           
+  SingleField:
+    type: string
+    enum:
+      - "brokerSymbol"
+    description: Constant. Set it to "brokerSymbol".
+          
   SingleMapping:
     type: object
     description: Map of Broker instrument name to TradingView instrument name
@@ -1580,10 +1582,3 @@ definitions:
       s:
         description: TradingView symbol name with prefix (AA:XXXX)
         type: string
-        
-  SingleField:
-    type: string
-    enum:
-      - "brokerSymbol"
-    description: Constant. Should not be changed. 
-    
