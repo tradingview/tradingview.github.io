@@ -3,7 +3,7 @@ swagger: '2.0'
 
 ################################################################################
 #                              API Information                                 #
-################################################################################
+################################################################################ 
 info:
   version: v1
   title: TradingView Broker API
@@ -1246,7 +1246,7 @@ definitions:
         items:
           type: number
       fractional:
-        description: Boolean showing whether this symbol wants to have complex price formatting (see minmov2 below) or not
+        description: Boolean showing whether this symbol wants to have complex price formatting (see minmov2) or not
         type: array
         items:
           type: number

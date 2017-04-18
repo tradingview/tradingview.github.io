@@ -117,3 +117,7 @@ h4.opblock-tag>span {
 	font-size: 24px !important;
 	font-family: Titillium Web,sans-serif !important;
 }
+
+.swagger-ui .wrapper {
+	width: 65%;
+}
