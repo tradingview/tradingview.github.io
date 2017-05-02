@@ -9,26 +9,25 @@ info:
   title: TradingView Broker API
   description: |
     # Overview
-    This documentation describes the TradingView REST API, which was developed for brokers that wish to take advantage of TradingView. Whether you license our [standalone Trading Terminal](https://www.tradingview.com/trading-terminal/) or wish to be supported in the Trading Panel on [TradingView.com](http://www.tradingview.com/chart), this is the only documentation you will need. 
+    This documentation describes the TradingView REST API, which was developed for brokers to connect their backend systems to the TradingView frontend to allow their customers to receive streaming data and and send orders from TradingView. This documentation describes connecting to the [standalone Trading Terminal](https://www.tradingview.com/trading-terminal/) and the Trading Panel on [TradingView.com](http://www.tradingview.com/chart). 
+    
+    The Trading Terminal is a standalone product that is licensed to individual brokers. Being supported in the Trading Panel on TradingView.com requires certification and a separate license. Get in touch with [founders@tradingview.com](mailto:founders@tradingview.com) to manage the above details. Once licensed, use the REST API to build the bridge from your backend into our system to enable data flow and order execution.
+
     
     The Trading Terminal is a paid standalone B2B product that can be licensed to an individual company. Being supported on TradingView.com will require paid certification and monthly maintenance fees. Once you pick an option (or choose both), use the REST API to build your bridge from your backend into our system to enable data flow and order execution. 
 
-    Reach out to [founders@tradingview.com](mailto:founders@tradingview.com) with any questions, we’ll be happy to help. 
-  
     To be supported on [TradingView.com](http://www.tradingview.com/chart), you will also need to:
       - Provide a logo in SVG vector format
       - Let us know if you support TradingView symbology / support mapping
       - Let us know if you support TradingView data or support history / streaming requests
       
-    ### When you need REST API
+    ### When to use the REST API
     
-    If you want to be supported in the Trading Panel on [TradingView.com](http://www.tradingview.com/chart), you need to implement REST API.
+    The REST API is a single solution to do both integrations - to the Trading Terminal and to be supported in the Trading Panel on [TradingView.com](http://www.tradingview.com/chart).
     
-    If you want to get the Trading Terminal and be supported in the Trading Panel on [TradingView.com](http://www.tradingview.com/chart), REST API is a single solution to do both integration at once.
+    If you need the Trading Terminal only, you can use this REST API or implement a client-side JavaScript adapter to your existing server API.
     
-    If you need the Trading Terminal only, you can choose to use the REST API or implement a client-side JavaScript adapter to your existing server API.
-    
-    This document is for those who desided to user REST API for the integration.
+    This document is for those who use the REST API for the integration.
 
     ### ETag
     
@@ -66,6 +65,8 @@ securityDefinitions:
     flow: password
     tokenUrl: https://api.broker.com/authorize/?client_id=CLIENT-ID
     description: Look for more request details in /authorize request. TradingView will set Authorization header to 'Bearer ' + access_token for all requests with authorization.
+    scopes: 
+      - general
 
 ################################################################################
 #                                   Parameters                                 #
