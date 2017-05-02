@@ -99,16 +99,20 @@ window.onload = function() {
   })
 
   window.ui = ui
+  
+  setTimeout(function() {
+    document.querySelectorAll('.opblock-tag-section.is-open .expand-operation').forEach(function(el) { el.click() }); 
+    var h4 = document.querySelector('.models>h4');
+	if (h4) { 
+	  h4.click(); 
+	}
+    document.querySelector('.js-footer').style.display = "block";
+  }, 1000);
 }
-
-setTimeout(function() {
-	document.querySelectorAll('.opblock-tag-section.is-open .expand-operation').forEach(function(el) { el.click() }); 
-	document.querySelector('.models>h4').click();
-}, 1000);
 
 </script>
 
-<footer class="tv-footer js-footer">
+<footer class="tv-footer js-footer" style="display:none">
   <div class="tv-footer__wrap">
     <div class="tv-footer__copyright">
       <span class="tv-footer__copyright--copy-text">(c) 2017 TradingView</span>

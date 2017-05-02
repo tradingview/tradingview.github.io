@@ -57,7 +57,8 @@ p {
 .header__wrap {
     margin: 0 auto;
     min-width: 760px;
-    max-width: 960px;
+    max-width: 1460px;
+	padding-left: 20px;
 }
 
 
@@ -89,7 +90,12 @@ p {
 .tv-footer__wrap {
     margin: 0 auto;
     min-width: 760px;
-    max-width: 960px;
+    max-width: 1460px;
+	padding-left: 20px;
+}
+
+.info>h4 {
+	text-align: center;
 }
 
 .tv-footer__copyright--copy-text {
