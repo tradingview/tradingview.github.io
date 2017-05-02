@@ -467,6 +467,7 @@ paths:
           in: formData
           description: Number of units
           type: number
+          required: true
         - name: limitPrice
           in: formData
           description: Limit Price for Limit or StopLimit order
@@ -879,6 +880,8 @@ definitions:
         description: Localized array of durations displayed in Order Ticket
         items:
           $ref: '#/definitions/Duration'
+      pullingInterval:
+        $ref: '#/definitions/PullingInterval'
           
   AccountStateResponse:
     type: object
@@ -1125,12 +1128,12 @@ definitions:
           
           `Status`  | Description 
           ----------|-------------
-          pending 	| order is not created on a broker's side yet 
-          inactive 	| bracket order is created but waiting for a base order to be filled 
-          working	  | order is created but not executed yet 
-          rejected	| order is rejected for some reason 
-          filled	  | order is fully executed 
-          canceled	| order is canceled 
+          pending   | order is not created on a broker's side yet 
+          inactive   | bracket order is created but waiting for a base order to be filled 
+          working    | order is created but not executed yet 
+          rejected  | order is rejected for some reason 
+          filled    | order is fully executed 
+          canceled  | order is canceled 
         type: string
         enum:
           - pending
@@ -1571,10 +1574,24 @@ definitions:
     description: Map of Broker instrument name to TradingView instrument name
     properties:
       f:
-        description: An array with the only one string element - broker symbol name.
+        description: An array with the only one string element - broker symbol name
         type: array
         items:
           type: string
       s:
         description: TradingView symbol name with prefix (AA:XXXX)
         type: string
+        
+  PullingInterval:
+    type: object
+    description: Time intervals in milliseconds that Trading Terminal uses to pull data from the server
+    properties:
+      history:
+        description: Time interval in milliseconds that Trading Terminal uses to request chart real-time bar udpates
+        type: number
+      quotes:
+        description: Time interval in milliseconds that Trading Terminal uses to request quote udpates
+        type: number
+      orders:
+        description:  Time interval in milliseconds that Trading Terminal uses to request orders
+        type: number
