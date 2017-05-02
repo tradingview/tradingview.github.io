@@ -9,7 +9,7 @@ info:
   title: TradingView Broker API
   description: |
     # Overview
-    This documentation describes the TradingView REST API, which was developed for brokers to connect their backend systems to the TradingView frontend to allow their customers to receive streaming data and and send orders from TradingView. This documentation describes connecting to the [standalone Trading Terminal](https://www.tradingview.com/trading-terminal/) and the Trading Panel on [TradingView.com](http://www.tradingview.com/chart). 
+    This documentation describes the TradingView REST API, which was developed for brokers to connect their backend systems to the TradingView frontend to allow their customers to receive streaming data and send orders from TradingView. This documentation describes connecting to the [standalone Trading Terminal](https://www.tradingview.com/trading-terminal/) and the Trading Panel on [TradingView.com](http://www.tradingview.com/chart). 
     
     The Trading Terminal is a standalone product that is licensed to individual brokers. Being supported in the Trading Panel on TradingView.com requires certification and a separate license. Get in touch with [founders@tradingview.com](mailto:founders@tradingview.com) to manage the above details. Once licensed, use the REST API to build the bridge from your backend into our system to enable data flow and order execution.
 
