@@ -65,8 +65,6 @@ securityDefinitions:
     flow: password
     tokenUrl: https://api.broker.com/authorize/?client_id=CLIENT-ID
     description: Look for more request details in /authorize request. TradingView will set Authorization header to 'Bearer ' + access_token for all requests with authorization.
-    scopes: 
-      - general
 
 ################################################################################
 #                                   Parameters                                 #
