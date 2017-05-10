@@ -65,6 +65,8 @@ securityDefinitions:
     flow: password
     tokenUrl: https://api.broker.com/authorize/?client_id=CLIENT-ID
     description: Look for more request details in /authorize request. TradingView will set Authorization header to 'Bearer ' + access_token for all requests with authorization.
+    scopes: 
+      general: permission to perform all requests
 
 ################################################################################
 #                                   Parameters                                 #
@@ -190,6 +192,8 @@ paths:
         - site-trading-and-data
         - site-trading-only
       description: Oauth2 Password authorization
+      consumes: 
+          - application/x-www-form-urlencoded
       parameters:
       - name: login
         in: formData
@@ -331,6 +335,8 @@ paths:
       security: 
         - oauth: []    
       description: Create a new order
+      consumes: 
+          - application/x-www-form-urlencoded
       parameters:
         - $ref: '#/parameters/accountId'
         - name: instrument
@@ -469,6 +475,8 @@ paths:
       security: 
         - oauth: []    
       description: Modify an existing order
+      consumes: 
+          - application/x-www-form-urlencoded
       parameters:
         - $ref: '#/parameters/accountId'
         - $ref: '#/parameters/orderId'
@@ -573,6 +581,8 @@ paths:
       security: 
         - oauth: []    
       description: Modify an existing position stop loss or take profit or both
+      consumes: 
+          - application/x-www-form-urlencoded
       parameters:
         - $ref: '#/parameters/accountId'
         - $ref: '#/parameters/positionId'
