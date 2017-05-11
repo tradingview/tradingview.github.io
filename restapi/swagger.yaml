@@ -1190,8 +1190,10 @@ definitions:
         type: number
       unrealizedPl:
         description: Unrealized (open) profit/loss
+        type: number
       realizedPl:
         description: Realized profit/loss for this instrument
+        type: number
       
   Execution:
     type: object
