@@ -918,10 +918,10 @@ definitions:
         description: Account Manager data. Structure of Account Manager is defined by `/config` response. Each element of this array is a table.
         type: array
         items:
-          description: Single Account Manager table data. Each element of this array is a table raw
+          description: Single Account Manager table data. Each element of this array is a table row
           type: array
           items:
-            description: Account Manager table raw data. Each element of this array is a table cell
+            description: Account Manager table rows data. Each element of this array is a table cell
             type: array
             items:
               type: string
@@ -1616,3 +1616,7 @@ definitions:
       orders:
         description:  Time interval in milliseconds that Trading Terminal uses to request orders
         type: number
+      accountManager: 
+        description: Time interval in milliseconds that Trading Terminal uses to update Account Manager tables
+        type: number
+      
