@@ -103,28 +103,28 @@ parameters:
   resolution:
     name: resolution
     in: query
-    description: Symbol resolution
+    description: Symbol resolution. Possible resolutions are daily (`1D`, `2D` ... ), weekly (`1W`, `2W` ...), monthly (`1M`, `2M`...) and an intra-day resolution - minutes(`1`, `2` ...).
     required: true
     type: string
   
   from:
     name: from
     in: query
-    description: Unix timestamp (UTC) of leftmost required bar.
+    description: Unix timestamp (UTC) of the leftmost required bar, including `from`.
     required: true
     type: number
     
   to:
     name: to
     in: query
-    description: Unix timestamp (UTC) of rightmost required bar
+    description: Unix timestamp (UTC) of the rightmost required bar, including `to`.
     required: true
     type: number
     
   countback:
     name: countback
     in: query
-    description: Number of bars (higher priority than from). Trading Terminal will never use it.
+    description: Number of bars (higher priority than `from`) starting with `to`. If `countback` is set, `from` should be ignorred. It is used only by tradingview.com, Trading Terminal will never use it.
     type: number
     
   locale:
@@ -715,7 +715,7 @@ paths:
         - terminal
       security:
         - oauth: []
-      description: Bars request. You can find examples in the [documentation](https://github.com/tradingview/charting_library/wiki/UDF#bars).
+      description: Bars request. You can find examples in the [documentation](https://github.com/tradingview/charting_library/wiki/UDF#bars). 
       parameters:
         - $ref: '#/parameters/symbol'
         - $ref: '#/parameters/resolution'
@@ -802,7 +802,7 @@ paths:
         - site-trading-and-data
       security:
         - oauth: []
-      description: "Stream of prices. Server constantly keeps the connection alive. If the connection is broken the server constantly tries to restore it. Transfer mode is 'chunked encoding'. The data feed should set 'Transfer-Encoding: chunked' and make sure that all intermediate proxies are set to use this mode. All messages are finished with '\\r\\n'. Streaming data should contain real-time only. It shouldn't contain snapshots of data."
+      description: "Stream of prices. Server constantly keeps the connection alive. If the connection is broken the server constantly tries to restore it. Transfer mode is 'chunked encoding'. The data feed should set 'Transfer-Encoding: chunked' and make sure that all intermediate proxies are set to use this mode. All messages are finished with '\\n'. Streaming data should contain real-time only. It shouldn't contain snapshots of data."
       responses:
         200:
           description: | 
@@ -812,9 +812,9 @@ paths:
             
             If there is only ask/bid implementation you must also set the trade (same as bid but it's size must be >= 1).
             
-            Size for trades is always >= 1 except for a correction. 
+            Size for trades is always >= 1 except for a correction. In case of correction size can be 0. 
             
-            In case of correction is can be 0. All times should be UNIX time UTC. 
+            All times should be UNIX time UTC. 
             
             Daily bars are required if they cannot be built from ticks (has_dwm should be set to true in the symbol information). 
             
