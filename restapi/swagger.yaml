@@ -1204,6 +1204,7 @@ definitions:
   Execution:
     type: object
     required:
+      - id
       - instrument
       - price
       - time
@@ -1547,10 +1548,10 @@ definitions:
     properties:
       ch:
         description: Change (displayed in Watch and Detail)
-        type: string
+        type: number
       chp:
         description: Change percent (displayed in Watch and Detail)
-        type: string
+        type: number
       lp:
         description: Last price
         type: number
