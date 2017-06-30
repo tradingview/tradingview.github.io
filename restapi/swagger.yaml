@@ -794,7 +794,7 @@ paths:
                 description: Data
                 type: array
                 items:
-                  - $ref: '#/definitions/QuotesResponse'
+                  $ref: '#/definitions/QuotesResponse'
                   
   /streaming:
     get:
@@ -1127,10 +1127,10 @@ definitions:
         description: Stop Price for Stop or StopLimit order.
         type: number
       parentId:
-        description: Identified of parent order or parent position (for position brackets) depending on parentType. Should be set for bracket orders.
+        description: Identifier of a parent order or a parent position (for position brackets) depending on `parentType`. Should be set only for bracket orders.
         type: string
       parentType:
-        description: Type of order parent. Should be set for bracket orders.
+        description: Type of order's parent. Should be set only for bracket orders.
         type: string
         enum:
           - order
