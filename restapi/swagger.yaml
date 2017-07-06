@@ -1050,6 +1050,9 @@ definitions:
       supportOrdersHistory:
         description: Whether you support /ordersHistory request
         type: boolean
+      supportExecutions:
+        description: Whether you support /executions request
+        type: boolean
 
   Instrument:
     type: object
@@ -1280,7 +1283,7 @@ definitions:
         description: Boolean showing whether this symbol wants to have complex price formatting (see minmov2) or not
         type: array
         items:
-          type: number
+          type: boolean
       pricescale:
         description: MinimalPossiblePriceChange = minmovement / pricescale
         type: array
@@ -1586,7 +1589,7 @@ definitions:
         items:
           $ref: '#/definitions/SingleMapping'
       fields:
-        description: Array with the only one constant 'brokerSymbol' value.
+        description: Array with the only one element `['brokerSymbol']`.
         type: array
         items:
           $ref: '#/definitions/SingleField'
