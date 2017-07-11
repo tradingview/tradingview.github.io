@@ -1041,9 +1041,6 @@ definitions:
       supportReducePosition:
         description: Reserved for future use
         type: boolean
-      supportReversePosition:
-        description: Whether you support reverse position by placing an opposite order
-        type: boolean
       supportStopLimitOrders:
         description: Whether you support StopLimit orders
         type: boolean
@@ -1179,6 +1176,7 @@ definitions:
       - qty
       - side
       - avgPrice
+      - unrealizedPl
     properties:
       id:
         type: string
