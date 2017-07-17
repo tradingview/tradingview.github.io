@@ -760,9 +760,11 @@ paths:
         - $ref: '#/parameters/to'
       responses:
         200:
-          description: Response is expected to be an object with properties listed below. Each property is an array
+          description: Response is expected to be an array.
           schema:
-            $ref: '#/definitions/TimescaleMarksArrays'
+            type: array
+            items:
+              $ref: '#/definitions/TimescaleMark'
             
   /quotes:
     get:
@@ -1236,7 +1238,7 @@ definitions:
           
   SymbolInfoArrays:
     type: object
-    description: SymbolInfo is an object containing symbols metadata. Each value of this object is an array of values which size is equal to the length of symbols or a single value that is applied to all symbols.
+    description: SymbolInfo is an object containing symbols metadata. Each value of this object is an array of values which size is equal to symbols count or a single value that is applied to all symbols.
     required:
       - symbol
       - description
@@ -1488,7 +1490,7 @@ definitions:
         items:
           type: number
           
-  TimescaleMarksArrays:
+  TimescaleMark:
     type: object
     description: Timescale marks data.
     required:
@@ -1497,35 +1499,25 @@ definitions:
       - label
     properties:
       id:
-        description: Unique identifiers of marks
-        type: array
-        items:
-          type: number
+        description: Unique identifier of marks
+        type: string
       time:
         description: bar time, unix timestamp (UTC)
-        type: array
-        items:
-          type: number
+        type: number
       color:
-        description: Mark colors
-        type: array
-        items:
-          type: string
+        description: Mark color
+        type: string
         enum:
           - red
           - green
           - blue
           - yellow
       tooltip:
-        description: tooltip text
-        type: array
-        items:
-          type: string
+        description: Tooltip text
+        type: string
       label:
-        description: a letter to be printed on a mark. Single character
-        type: array
-        items:
-          type: string
+        description: A letter to be printed on a mark. Single character
+        type: string
           
   QuotesResponse:
     type: object
