@@ -1608,15 +1608,18 @@ definitions:
     description: Time intervals in milliseconds that Trading Terminal uses to pull data from the server
     properties:
       history:
-        description: Time interval in milliseconds that Trading Terminal uses to request chart real-time bar udpates
+        description: Time interval in milliseconds that Trading Terminal uses to request chart real-time bar udpates. Default value is 500 ms
         type: number
       quotes:
-        description: Time interval in milliseconds that Trading Terminal uses to request quote udpates
+        description: Time interval in milliseconds that Trading Terminal uses to request quote udpates. Default value is 500 ms
         type: number
       orders:
-        description:  Time interval in milliseconds that Trading Terminal uses to request orders
+        description:  Time interval in milliseconds that Trading Terminal uses to request orders. Default value is 500 ms
+        type: number
+      positions:
+        description:  Time interval in milliseconds that Trading Terminal uses to request positions. Default value is 1000 ms
         type: number
       accountManager: 
-        description: Time interval in milliseconds that Trading Terminal uses to update Account Manager tables
+        description: Time interval in milliseconds that Trading Terminal uses to update Account Manager tables. Default value is 500 ms
         type: number
       
