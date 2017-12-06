@@ -24,4 +24,17 @@ Session:
 <input type="submit" value="Parse" onclick="return displayResult();"/>
 <div id="result" style="margin-top: 10px"></div>
 </form>
+
+<script>
+try {
+	var url = new URL(document.location.toString());
+	var session = url.searchParams.get("session");
+	if (session) {
+		document.querySelector("#session").value = session;
+	}
+} catch(e) {
+	// URL not supported
+}
+</script>
+
 </html>
