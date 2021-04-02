@@ -1,0 +1,190 @@
+/**
+ * CNBCMultiSnapshot
+ *
+ * Singleton that can be used to fetch an array of snapshot quotes for varying
+ * security types. The results are normalized and then returned via callback.
+ */
+
+/* jshint -W117 */
+/* jshint -W069 */
+
+
+var timeZoneMap = {};
+timeZoneMap['EDT'] = 'America/New_York';
+timeZoneMap['BST'] = 'Europe/London';
+timeZoneMap['CEST'] = 'Europe/Berlin';
+timeZoneMap['CTT'] = 'Asia/Hong_Kong';
+timeZoneMap['JST'] = 'Asia/Tokyo';
+
+var CNBCMultiSnapshot = function () {};
+
+CNBCMultiSnapshot.isIndexSymbol = function (symbol) {
+	if (symbol.charAt(0) == '.') return true;
+	return false;
+};
+
+CNBCMultiSnapshot.isCommoditySymbol = function (symbol) {
+	if (symbol.charAt(0) == '@') return true;
+	return false;
+};
+
+CNBCMultiSnapshot.isForexSymbol = function (symbol) {
+	if (symbol.charAt(symbol.length - 1) == '=') return true;
+	return false;
+};
+
+
+
+
+
+CNBCMultiSnapshot.makeUrl = function (symbol, date, type, number) {
+	console.log(tsApiEnv + ' ' + quoteEnv);
+	if (!number) number = 1;
+	switch (type) {
+	case "EOD":
+		return tsApiEnv + "lastclose/lnt/EOD/" + encodeURIComponent(symbol) + "/1D/" + date + "/" + number + "/EST5EDT.json";
+		break;
+	case "Last":
+		return tsApiEnv + "ticks/lnt/" + encodeURIComponent(symbol) + "/" + number + "/EST5EDT.json";
+		break;
+	case "Current":
+		return quoteEnv + "quote.htm?symbols=" + encodeURIComponent(symbol) + "&requestMethod=quick&exthrs=1&noform=1&fund=1&events=1&output=json&partnerId=2";
+		break;
+	}
+
+}
+
+/**
+ * Gets snapshot quotes for an array of symbols
+ * @param  {Array}   symbols        Array of symbol names
+ * @param  {Integer} settings 		settings.lastQuote = true/false, settings.lastNTicks = number, settings.lastNCloses = number
+ * @param  {Function} cb             Callback function to receive symbol data. function(err, arr)
+ */
+CNBCMultiSnapshot.getQuotes = function (symbols, settings, cb) {
+	// get current quote
+	var lastQuotes = 0;
+	var quotes = 0;
+	var EODQuotes = 0;
+
+	if (settings.lastQuote) lastQuotes = 1;
+	if (settings.lastNTicks) quotes = symbols.length;
+	if (settings.lastNCloses) EODQuotes = symbols.length;
+
+
+	symbolsJoin = symbols.join('|', symbols);
+
+	var response = {};
+
+	for (var i = 0; i < symbols.length; i++) {
+		response[symbols[i]] = {}; // initialize responses
+	}
+
+
+	function callBack() {
+		if (!quotes && !EODQuotes) {
+			cb(response);
+		}
+	}
+
+	function change(symbol) {
+		var last = response[symbol].Last;
+		var lastClose = response[symbol].LastClose;
+		if (last && lastClose) {
+			response[symbol].Change = last - lastClose;
+			response[symbol].PercentChange = response[symbol].Change / lastClose * 100;
+		}
+	}
+
+	function processCurrentResponse(status, result, additionalParams) {
+		if (status == 200) {
+			result = JSON.parse(result);
+
+			var number = additionalParams[1];
+			var cb = additionalParams[2];
+
+			if (result.QuickQuoteResult.QuickQuote.length) {
+				for (var i = 0; i < result.QuickQuoteResult.QuickQuote.length; i++) {
+					var quickQuote = result.QuickQuoteResult.QuickQuote[i];
+					var symbol = quickQuote.symbol;
+					response[symbol].TimeZone = timeZoneMap[quickQuote.timeZone];
+					response[symbol].Symbol = symbol;
+					response[symbol].Last = quickQuote.last;
+					response[symbol].Change = quickQuote.change;
+					response[symbol].PercentChange = quickQuote.change_pct;
+				}
+			} else {
+				var quickQuote = result.QuickQuoteResult.QuickQuote;
+				var symbol = quickQuote.symbol;
+				response[symbol].TimeZone = timeZoneMap[quickQuote.timeZone];
+			}
+
+			lastQuotes--;
+			callBack();
+
+		}
+	}
+
+	function processResponse(status, result) {
+		quotes--;
+		if (status == 200) {
+			result = JSON.parse(result);
+			var symbol = result.requestDetails.symbol;
+			var lastTick = result.tickData.ticks[0];
+			response[symbol].Last = parseFloat(lastTick.price);
+			response[symbol].Symbol = symbol;
+			response[symbol].Ticks = result.tickData.ticks;
+			change(symbol);
+		}
+		if (!quotes) callBack();
+	}
+
+	function processEODResponse(status, result) {
+		EODQuotes--;
+		if (status == 200) {
+			result = JSON.parse(result);
+			var symbol = result.requestDetails.symbol;
+			if(result.lastBarData.last_bars.length){
+				var lastBar = result.lastBarData.last_bars[0];
+				console.log("have lastBar " + lastBar)
+			}else{
+				var lastBar = 0;
+				console.log("no lastBar " + lastBar)
+			}
+			
+			response[symbol].LastClose = parseFloat(lastBar.close);
+			response[symbol].EODData = result.lastBarData.last_bars;
+			for (var i in response[symbol].EODData) {
+				currentBar = response[symbol].EODData[i];
+				currentBar.DT = new Date(currentBar.tradeTimeMillis);
+				currentBar.Open = parseFloat(currentBar.open);
+				currentBar.High = parseFloat(currentBar.high);
+				currentBar.Low = parseFloat(currentBar.low);
+				currentBar.Close = parseFloat(currentBar.close);
+				currentBar.Volume = parseInt(currentBar.volume);
+				currentBar.Adj_Close = parseFloat(currentBar.close);
+			}
+			change(symbol);
+		}
+		if (!EODQuotes) callBack();
+	}
+
+
+
+	if (settings.lastQuote) {
+		serverFetch(this.makeUrl(symbolsJoin, null, "Current", number), null, null, processCurrentResponse, [symbols, number, cb]);
+	}
+	var date = new Date();
+
+	date.setDate(date.getDate() + 1);
+	date = date.getFullYear() + ('0' + (date.getMonth() + 1)).slice(-2) + ('0' + date.getDate()).slice(-2);
+	for (var i = 0; i < symbols.length; i++) {
+		if (settings.lastNTicks) {
+			serverFetch(CNBCMultiSnapshot.makeUrl(symbols[i], date, "Last", settings.lastNTicks), null, null, processResponse);
+		}
+		if (settings.lastNCloses) {
+			serverFetch(CNBCMultiSnapshot.makeUrl(symbols[i], date, "EOD", settings.lastNCloses), null, null, processEODResponse);
+		}
+	}
+
+
+};

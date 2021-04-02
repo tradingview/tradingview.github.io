@@ -1,0 +1,11 @@
+mdjs._dL['ct'] = {'md_key':'sp-up-0_25,djia-up-0_75'};mdjs._dL['dt'] = {'mdt_6':'on','mdt_4':'on','mdt_1':'on'};mdjs._dL['d'] = ["mdt_6","mdt_4","mdt_1"];if(window.hasOwnProperty("mdjsAsyncHandler")){ mdjsAsyncHandler();}if (typeof mdjs !== "undefined" && typeof googletag !== "undefined" && typeof googletag.cmd !== "undefined") {
+	var mdTargets = mdjs.targeting.getCustom();
+
+	googletag.cmd.push(function() {
+		for(var key in mdTargets){
+			if (mdTargets.hasOwnProperty(key)) {
+				googletag.pubads().setTargeting(key,mdTargets[key]);
+			}
+		}
+	});
+}

@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<!-- saved from url=(0189)https://sc.cnbcfm.com/applications/cnbc.com/staticcontent/html/chartiq/cnbc-chart.html?symbol=.SPX&name=S%26P%20500%20Index&range=1D&charttype=baseline_delta_mountain&ftse_hide=1&vn=5388689 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title></title>
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+        <link href="./normalize.css" rel="stylesheet" type="text/css">
+        <!--<link href="../css/chartiq.css" rel="stylesheet" type="text/css" />-->
+        <link href="./stx-chart.css" rel="stylesheet" type="text/css">
+	<script src="./jquery.min.js.загрузка"></script>
+	<!--[if IE 8]><script type="text/javascript" src="excanvas.js"></script><![endif]-->
+	<!-- Use excanvas.js to support IE8. See notes in chartContainer -->
+	<!--[if IE 8]><script>var isIE8=true;</script><![endif]-->
+	<style>
+		#chartSize {
+			opacity: 0.5;
+			/*display: none;*/
+		}
+		/*.stx-chart-panel.stx-show {
+			display: block;
+		}*/
+	</style>
+
+</head>
+
+<body>
+	<div id="chartContainer" style="width: 410px; height: 208px;">
+		<!--[if IE 8]><canvas id="ie8canvas" width="0" height="0" style="display:none"></canvas><![endif]-->
+		<!--[if IE 8]><canvas id="ie8canvasTemp" width="0" height="0" style="display:none"></canvas><![endif]-->
+		<!--[if IE 8]><canvas id="ie8canvasFloat" width="0" height="0" style="display:none"></canvas><![endif]-->
+	<span class="stx-btn stx_annotation_save annotationSave" style="display: none;">save</span><span class="stx-btn stx_annotation_cancel annotationCancel" style="display: none; margin-left:10px;">cancel</span><div class="stx_sticky mSticky"> <span class="mStickyInterior"></span> <span class="mStickyRightClick"><span class="overlayEdit stx-btn" style="display:none"><span>&nbsp;</span></span> <span class="overlayTrashCan stx-btn" style="display:none"><span>&nbsp;</span></span> <span class="mouseDeleteInstructions"><span>(</span><span class="mouseDeleteText">right-click to delete</span><span class="mouseManageText">right-click to manage</span><span>)</span></span></span></div><div class="stx_crosshair stx_crosshair_x crossX" style="display: none;"></div><div class="stx_crosshair stx_crosshair_y crossY" style="display: none;"></div><div class="stx_chart_controls chartControls" style="display: block; bottom: 42px;"><div class="chartSize"><span class="stx-zoom-out"></span><span class="stx-zoom-in"></span></div></div><div class="stx-float-date floatDate" style="visibility: hidden; left: 322.5px; bottom: 0px;"></div><div class="stx-ico-handle handleTemplate" style="display: none;"><span></span></div><div class="stx-panel-control iconsTemplate"><div class="stx-panel-title"></div><div class="stx-btn-panel"><span class="stx-ico-up"></span></div><div class="stx-btn-panel"><span class="stx-ico-focus"></span></div><div class="stx-btn-panel"><span class="stx-ico-down"></span></div><div class="stx-btn-panel"><span class="stx-ico-edit"></span></div><div class="stx-btn-panel"><span class="stx-ico-close"></span></div></div><div class="stx-baseline-handle baselineHandle" style="display: none;"></div><div class="stx-holder stx-panel-chart" cq-panel-name="chart" style="right: 0px; top: 0px; left: 0px; height: 208px; display: block;"><div class="stx-subholder" cq-panel-name="chart" style="z-index: 1; left: 0px; width: 360px; top: 0px; height: 178px;"><div class="stx-panel-control iconsTemplate stx-show stx-chart-panel" style="display: block;"><div class="stx-panel-title chart-title">S&amp;P 500 Index</div><div class="stx-btn-panel" style="display: none;"><span class="stx-ico-up"></span></div><div class="stx-btn-panel" style="display: none;"><span class="stx-ico-focus"></span></div><div class="stx-btn-panel" style="display: none;"><span class="stx-ico-down"></span></div><div class="stx-btn-panel" style="display: none;"><span class="stx-ico-edit"></span></div><div class="stx-btn-panel" style="display: none;"><span class="stx-ico-close"></span></div></div><div class="stx_jump_today home" style="display:none"><span></span></div></div></div><div class="stx-ico-handle handleTemplate" style="display: none; left: 0px; width: 360px;"><span></span></div><canvas height="208" width="410" style="position: absolute; left: 0px; width: 410px; height: 208px;"></canvas><canvas height="208" width="410" style="position: absolute; left: 0px; display: none; width: 410px; height: 208px;"></canvas><canvas height="208" width="410" style="position: absolute; left: 0px; display: none; width: 410px; height: 208px;"></canvas></div>
+
+	<ul class="hu">
+		<li><span class="huLabel"></span><span id="huPrevious" class="huField">Previous Close: 3910.52</span></li>
+	</ul>
+
+	<ul class="hu ciq-mouseover" style="margin-top: 18px; display:none;">
+		<li><span class="huLabel"></span><span id="huOpen" class="huField">O: 3910.52</span></li>
+		<li><span class="huLabel"></span><span id="huHigh" class="huField">H: 3910.52</span></li>
+		<li><span class="huLabel"></span><span id="huLow" class="huField">L: 3910.52</span></li>
+
+	</ul>
+
+	<ul class="hu ciq-mouseover" style="margin-top: 36px; display:none">
+		<li><span class="huLabel"></span><span id="huClose" class="huField">C: 3910.52</span></li>
+		<li style="display:none"><span class="huLabel"></span><span id="huVolume" class="huField"></span></li>
+		<li><span class="huLabel"></span><span id="huDate" class="huField">DT: 3/24/21 12:15 AM</span></li>
+	</ul>
+
+	<script type="text/javascript">
+		var tsApiEnv,
+		env,
+		quoteEnv,
+		versionNum,
+		scriptsArray = ["../../scripts/libraries/chartiq/chartiq.min.js?",
+		"../../scripts/libraries/chartiq/exchangeHours.js?",
+		"../../scripts/libraries/chartiq/ciq-widget-utilities.js?",
+		"../../scripts/libraries/chartiq/ciq-cnbc.js?",
+		"../../scripts/libraries/chartiq/ciq-cnbc-quotefeed.js?"
+		];
+
+
+		env = window.location.host;
+		tsApiEnv = env.indexOf('cnbc') > 4 ? "//ts-api.cnbc.com/harmony/app/" : "//ts-api.cnbc.com/harmony/app/";
+		quoteEnv = env.indexOf('cnbc') > 4 ? "//quote.cnbc.com/quote-html-webservice/" : "//quote.cnbc.com/quote-html-webservice/";
+
+		versionNum = window.location.search.split('mountain&')[1];
+
+
+		for(var i=0; i<scriptsArray.length; i++) {
+			document.write("<script src=" + scriptsArray[i] + versionNum + "><\/script>");
+		}
+
+
+	</script><script src="./chartiq.min.js.загрузка"></script><script src="./exchangeHours.js.загрузка"></script><script src="./ciq-widget-utilities.js.загрузка"></script><script src="./ciq-cnbc.js.загрузка"></script><script src="./ciq-cnbc-quotefeed.js.загрузка"></script>
+
+
+	<!--<script src="stxThirdParty.js"></script>
+	<script src="stxTimeZoneData.js"></script>
+	<script src="stx.js"></script>
+	<script src="stxKernel.js"></script>
+	<script src="stxKernelOverrides.js"></script>
+	<script src="stxLibrary.js"></script>-->
+
+
+	<script>
+		$(document).ready(function() {
+			$('#chartContainer').mouseover(function() {
+				$('.ciq-mouseover').show();
+			});
+
+			$('#chartContainer').mouseout(function() {
+				$('.ciq-mouseover').hide();
+			});
+		});
+
+
+		(function() {
+		  setTimeout(function(arg1) {
+		    if (arg1 === 'test') {
+		      // feature test is passed, no need for polyfill
+		      return;
+		    }
+		    var __nativeST__ = window.setTimeout;
+		    window.setTimeout = function(vCallback, nDelay /*, argumentToPass1, argumentToPass2, etc. */ ) {
+		      var aArgs = Array.prototype.slice.call(arguments, 2);
+		      return __nativeST__(vCallback instanceof Function ? function() {
+		        vCallback.apply(null, aArgs);
+		      } : vCallback, nDelay);
+		    };
+		  }, 0, 'test');
+
+		  var interval = setInterval(function(arg1) {
+		    clearInterval(interval);
+		    if (arg1 === 'test') {
+		      // feature test is passed, no need for polyfill
+		      return;
+		    }
+		    var __nativeSI__ = window.setInterval;
+		    window.setInterval = function(vCallback, nDelay /*, argumentToPass1, argumentToPass2, etc. */ ) {
+		      var aArgs = Array.prototype.slice.call(arguments, 2);
+		      return __nativeSI__(vCallback instanceof Function ? function() {
+		        vCallback.apply(null, aArgs);
+		      } : vCallback, nDelay);
+		    };
+		  }, 0, 'test');
+		}());
+
+
+		var setRange = null;
+		var baseline = 0;
+		var dataForBaseline = [];
+		var qsParm = STX.qs();
+		var _symbol = decodeURIComponent(qsParm["symbol"]);
+		var _symbolName = decodeURIComponent(qsParm["name"]);
+		var _range = decodeURIComponent(qsParm["range"]);
+		var _chartType = decodeURIComponent(qsParm["charttype"]);
+		var stxx = new STXChart($$("chartContainer"));
+		var refreshRate = 300;
+		var sd;
+		var open;
+		var close;
+		var openHour;
+		var openMinute;
+		var closeHour;
+		var closeMinute;
+
+		var exchangeMap = {};
+		exchangeMap['.SPX'] = 'XNYS';
+		exchangeMap['.DJI'] = 'XNYS';
+		exchangeMap['.IXIC'] = 'XNYS';
+		exchangeMap['.FTSE'] = 'XLON';
+		exchangeMap['.N225'] = 'XTK1'
+		exchangeMap['.VIX'] = '24HR';
+		exchangeMap['VIX'] = '24HR';
+		exchangeMap['.HSI'] = 'XHKG';
+		exchangeMap['.GDAXI'] = 'FRAB';
+		exchangeMap['.SSEC'] = 'SHSC';
+
+		var alreadyMovedOnDate = 0;
+
+		stxx.attachQuoteFeed(new STX.QuoteFeed.CNBC(tsApiEnv, quoteEnv), {
+			"refreshInterval": refreshRate,
+			"callback": function (params) {
+				if (_range == "1D") {
+					if (!stxx.chart.masterData || !stxx.chart.masterData.length) {
+						setRange(_range);
+						return;
+					}
+					var masterData = stxx.chart.masterData;
+					var lastDate = masterData[masterData.length - 1].DT.getDate();
+					if (lastDate != masterData[masterData.length - 2].DT.getDate() && lastDate != alreadyMovedOnDate) {
+						alreadyMovedOnDate = lastDate;
+						if (_chartType == "baseline_delta") {
+							stxx.chart.scroll = 3;
+							stxx.draw();
+						} else {
+							stxx.chart.scroll = 1;
+						}
+					}
+					//setMostRecentDaySpan();
+				}
+			}
+		});
+
+		var setChartType = function (chartType) {
+
+			stxx.layout.chartType = chartType;
+			stxx.draw();
+		}
+
+
+		function clearHeadsUpHR() {
+			$$("huOpen").innerHTML = "";
+			$$("huClose").innerHTML = "";
+			$$("huHigh").innerHTML = "";
+			$$("huLow").innerHTML = "";
+			$$("huDate").innerHTML = "";
+			$$("huVolume").innerHTML = "";
+		}
+
+
+		var setRangeAndSymbol = function (range, symbol, symbolName, chartType, cb) {
+			//console.log(symbol);
+			clearHeadsUpHR();
+			alreadyMovedOnDate = 0;
+			console.log(range);
+			_range = range;
+			_symbol = decodeURIComponent(symbol);
+			_symbolName = decodeURIComponent(symbolName);
+			_chartType = decodeURIComponent(chartType);
+
+
+
+			getBaseLine();
+			if (cb) cb();
+
+		};
+
+		function streamTrade(price, now, symbol) {
+			if (!stxx.lastTrade) stxx.lastTrade = {};
+			if (!stxx.lastTradeTime) stxx.lastTradeTime = {};
+			price = parseFloat(price);
+			stxx.lastTrade[symbol] = price;
+			stxx.lastTradeTime[symbol] = now;
+			if (symbol == stxx.chart.symbol) {
+				var newDate = new Date(parseInt(now));
+				var EOD = (hhmmss(newDate) == '00:00:00');
+				var newDisplayDate = new Date(newDate);
+
+				if (stxx.displayZone && !EOD) {
+					newDisplayDate = STX.convertTimeZone(newDate, null, stxx.displayZone);
+				}
+
+				var moveDay = false;
+
+				if (stxx.chart.masterData && stxx.chart.masterData.length) {
+					lastDate = new Date(stxx.chart.masterData[stxx.chart.masterData.length-1].displayDate?stxx.chart.masterData[stxx.chart.masterData.length-1].displayDate:stxx.chart.masterData[stxx.chart.masterData.length-1].DT);
+					if (_range=='1D' && (newDisplayDate.getDate() != lastDate.getDate())) moveDay=true;
+				}
+
+				if (!EOD && stxx.chart.market._was_open(newDisplayDate, true)) {
+					stxx.streamTrade({'last': price}, newDate);
+					if (moveDay) {
+						stxx.chart.scroll=1;
+						stxx.draw();
+					}
+				}
+
+
+			}
+
+		}
+
+
+		function getBaseLine() {
+			if (!_symbol) return;
+			//console.log(_symbol);
+
+			switch (_range) {
+			case "1D":
+				CNBCMultiSnapshot.getQuotes([_symbol], {lastNCloses: 4}, gotBaseline); //extra to deal with timezones and weekends
+				break;
+			case "5D":
+				CNBCMultiSnapshot.getQuotes([_symbol], {lastNCloses: 11}, gotBaseline);
+				break;
+			case "1M":
+			case "30D":
+				CNBCMultiSnapshot.getQuotes([_symbol], {lastNCloses: 62}, gotBaseline);
+				break;
+			case "3M":
+				CNBCMultiSnapshot.getQuotes([_symbol], {lastNCloses: 120}, gotBaseline);
+				break;
+			case "6M":
+				CNBCMultiSnapshot.getQuotes([_symbol], {lastNCloses: 200}, gotBaseline);
+				break;
+			case "1Y":
+			case "YTD":
+				CNBCMultiSnapshot.getQuotes([_symbol], {lastNCloses: 400}, gotBaseline);
+				break;
+			case "5Y":
+				CNBCMultiSnapshot.getQuotes([_symbol], {lastNCloses: 2000}, gotBaseline);
+				break;
+			}
+		}
+
+		function gotBaseline(symbolQuote) {
+			//console.log(_symbol);
+
+			if (!exchangeMap[_symbol]) exchangeMap[_symbol] = 'XNYS';
+			stxx.setTimeZone("America/New_York", STX.Exchanges[exchangeMap[_symbol]].market_tz);
+
+			if (!symbolQuote[_symbol]) {
+				getBaseLine();
+				return;
+			}
+			var EODData = symbolQuote[_symbol].EODData;
+			if (!stxx.EODData) stxx.EODData = {};
+			stxx.EODData[_symbol] = EODData;
+
+
+			dataForBaseline = {};
+			for (var i = 0; i < EODData.length; i++) {
+				EODDataValue = EODData[i];
+				EODDataDate = new Date(EODDataValue.tradeTimeMillis);
+				EODDataDate = STX.convertTimeZone(EODDataDate, null, stxx.displayZone);
+				EODDataDate = new Date(EODDataDate.getFullYear(), EODDataDate.getMonth() + 1, EODDataDate.getDate());
+
+				dataForBaseline[EODDataDate] = EODDataValue;
+			}
+
+
+
+			run(_symbol, _symbolName, _range, _chartType);
+		}
+
+
+		function run(symbol, symbolName, range, chartType) {
+			//console.log(symbol);
+
+			symbol = decodeURIComponent(symbol);
+			//console.log(symbol);
+			//if (!window.isIE8) $$("chartContainer").innerHTML = "";
+
+			//var exchange = symbol.split(".")[1];
+			var isForex = CNBCMultiSnapshot.isForexSymbol(symbol);
+
+			var exchange = exchangeMap[_symbol];
+			if (!exchange) exchange = 'XNYS';
+
+			exchange = STX.Exchanges[exchange];
+
+			open = '23:59';
+			close = '00:00';
+
+			for (var i in exchange.hours) {
+				if (exchange.hours[i].open < open) {
+					open = exchange.hours[i].open;
+				}
+				if (exchange.hours[i].close > close) {
+					close = exchange.hours[i].close;
+				}
+			}
+
+			var openSplit = open.split(':');
+			var closeSplit = close.split(':');
+
+			var openHour = parseInt(openSplit[0]);
+			var openMinute = parseInt(openSplit[1]);
+			var closeHour = parseInt(closeSplit[0]);
+			var closeMinute = parseInt(closeSplit[1]);
+
+			if(exchangeMap[_symbol] == 'XNYS') {
+				STX.Market.Custom = {
+					name: "Custom",
+					market_tz: STX.Exchanges[exchangeMap[_symbol]].market_tz,
+					rules: [
+							//{"dayofweek": 0, "open": open, "close": close}, //sun
+							{"dayofweek": 1, "open": open, "close": close},
+							{"dayofweek": 2, "open": open, "close": close},
+							{"dayofweek": 3, "open": open, "close": close},
+							{"dayofweek": 4, "open": open, "close": close},
+							{"dayofweek": 5, "open": open, "close": close},
+							//{"dayofweek": 6, "open": open, "close": close}
+							//always closed on Christmas
+							{"date": "*-12-25", "open": "00:00", "close": "00:00"},
+
+							//always closed on 4th of July
+							{"date": "*-07-04", "open": "00:00", "close": "00:00"},
+
+							//always close on new years day
+							{"date": "*-01-01", "open": "00:00", "close": "00:00"},
+
+							//Some holidays are observed on different days each year or if
+							//the day falls on a weekend. Each of those rules must be specified.
+							{"date": "2012-01-02", "open": "00:00", "close": "00:00"},
+
+							//As a special case if no open and close attributes are set they
+							//will be assumed "00:00" and "00:00" respectively
+							{"date": "2017-01-02"},
+							{"date": "2017-01-16"},
+							{"date": "2017-02-20"},
+							{"date": "2017-04-14"},
+							{"date": "2017-05-29"},
+							{"date": "2017-07-03", "open": "4:00", "close": "9:30", name: "pre"},
+							{"date": "2017-07-03", "open": "9:30", "close": "13:00"},
+							{"date": "2017-09-04"},
+							{"date": "2017-11-23"},
+							{"date": "2017-11-24", "open": "4:00", "close": "9:30", name: "pre"},
+							{"date": "2017-11-24", "open": "9:30", "close": "13:00"},
+							{"date": "2017-12-26"}
+					]
+				};
+			} else {
+				STX.Market.Custom = {
+					name: "Custom",
+					market_tz: STX.Exchanges[exchangeMap[_symbol]].market_tz,
+					rules: [
+							//{"dayofweek": 0, "open": open, "close": close}, //sun
+							{"dayofweek": 1, "open": open, "close": close},
+							{"dayofweek": 2, "open": open, "close": close},
+							{"dayofweek": 3, "open": open, "close": close},
+							{"dayofweek": 4, "open": open, "close": close},
+							{"dayofweek": 5, "open": open, "close": close},
+							//{"dayofweek": 6, "open": open, "close": close}
+					]
+				};
+			}
+
+			var INTRADAY_INTERVAL = 5;
+			/*stxx.masterData = null;
+			stxx.chart.masterData = null;
+			stxx.chart.dataSegment = null;
+			stxx.chart.dataSet = null;*/
+
+			stxx.layout.crosshair = false;
+			stxx.axisBorders = false;
+			stxx.cleanupGaps = false;
+			stxx.preferences.whitespace = 0;
+			//stxx.manageTouchAndMouse = false; uncomment to turn off interaction
+			stxx.layout.chartType = chartType ? chartType : "baseline_delta";
+			stxx.streamParameters.fillGaps = false;
+			stxx.setMarket(STX.Market.Custom);
+			stxx.dataZone = "America/New_York";
+
+			var chart = stxx.chart;
+
+			chart.symbolDisplay = symbolName ? symbolName : " ";
+			chart.xAxis.displayBorder = true;
+
+			//Some options
+			//hide gridlines
+			//chart.xAxis.displayGridLines = false;
+			//chart.yAxis.displayGridLines = false;
+
+			//overlay y-axis on chart
+			//chart.yAxis.position = "right";
+			chart.yAxis.decimalPlaces = 2;
+			chart.yAxis.maxDecimalPlaces = 2;
+			//chart.yAxis.justifyRight = true;
+
+			chart.baseline.userLevel = false;
+
+			//prevent user from scrolling too far forward
+			/*if (range == '1D') {
+				stxx.minimumLeftBars = 1;
+			} else {
+				stxx.minimumLeftBars = 10;
+			}*/
+
+			//prevent user from scrolling too far backward
+			//chart.allowScrollPast = false;
+			chart.lockScroll = true;
+			chart.xAxis.minimumLabelWidth = 20;
+
+			function setHeadsUpBaseline() {
+				var prevText = _range + ' Ago';
+				if (_range=='1D') {
+					prevText = 'Previous'
+				} else if (_range=='YTD') {
+					prevText = 'Last Year'
+				}
+				$$('huPrevious').innerHTML = prevText + ' Close: ' + stxx.formatPrice(stxx.chart.baseline.defaultLevel);
+			}
+
+			function cb() {
+				clearHeadsUpHR();
+				$$$(".stx-chart-panel.stx-show").style.display = "block";
+
+				if (!chart.dataSegment) return;
+
+				var firstPointOnChart = chart.dataSegment[0];
+				var firstPointDate =  new Date(firstPointOnChart.DT);
+				if (stxx.displayZone && firstPointOnChart.displayDate) {
+					firstPointDate = new Date(firstPointOnChart.displayDate);
+				}
+
+				var baseLineDate = new Date(firstPointDate.getFullYear(), firstPointDate.getMonth() + 1, firstPointDate.getDate());
+				/*if (firstPointOnChart.displayDate) {
+					var firstPointDate = STX.convertTimeZone(firstPointOnChart.displayDate, stxx.displayZone, stxx.dataZone);
+					baseLineDate = new Date(firstPointDate.getFullYear(), firstPointDate.getMonth(), firstPointDate.getDate());
+				}*/
+				baseLineDate.setDate(baseLineDate.getDate() - 1);
+
+
+				var i = 0;
+				//get previous close for baseline
+				while (!dataForBaseline[baseLineDate] && i < 10) {
+					baseLineDate.setDate(baseLineDate.getDate() - 1);
+					i++;
+				}
+
+				if (dataForBaseline[baseLineDate]) {
+					chart.baseline.defaultLevel = Number(dataForBaseline[baseLineDate].close);
+					setHeadsUpBaseline();
+					stxx.draw();
+				}
+
+				$$('chartContainer').style.visibility = "";
+			}
+
+			function setMostRecentDaySpan() {
+				var chart=stxx.chart;
+				clearHeadsUpHR();
+				switch (_range) {
+				case "1D":
+					if (!chart.dataSegment || chart.dataSegment.length<=1 || stxx.displayZone!='America/New_York') {
+						var leftDt = new Date(chart.dataSet[chart.dataSet.length - 1].DT.getTime());
+						var rightDt = new Date(leftDt.getTime());
+						leftDt = STX.convertTimeZone(leftDt, null, stxx.displayZone);
+						rightDt = STX.convertTimeZone(rightDt, null, stxx.displayZone);
+
+						var openTime = new Date(leftDt.getTime());
+						var closeTime = new Date(rightDt.getTime());
+
+						closeTime = STX.convertTimeZone(closeTime, null, stxx.displayZone);
+						openTime = STX.convertTimeZone(openTime, null, stxx.displayZone);
+
+						/*if (chart.symbol.indexOf('@') == -1 && chart.symbol.indexOf('=') == -1) {
+							if (stxx.displayZone == "America/New_York") {
+								openTime.setHours(9, 30, 0);
+							} else {
+								openTime.setHours(9, 0, 0);
+							}
+							closeTime.setHours(16, 0, 0);
+						} else {
+							openTime.setHours(0, 0, 0);
+							closeTime.setHours(23, 59, 59);
+						}*/
+						openTime.setHours(openHour, openMinute);
+						closeTime.setHours(closeHour, closeMinute);
+
+
+
+						// market open - start at open time
+						if (rightDt.getTime() > openTime.getTime()) {
+							leftDt.setHours(openTime.getHours(), openTime.getMinutes());
+						} else {
+							// else pre-market - first point of the day
+							for (var key in chart.dataSet) {
+								value = chart.dataSet[key];
+								if (STX.yyyymmdd(value.DT) == STX.yyyymmdd(leftDt)) {
+									leftDt.setHours(value.DT.getHours(), value.DT.getMinutes());
+									break;
+								}
+							};
+						}
+
+						// if market is still open extend chart to 4pm, otherwise do nothing
+						if (closeTime.getTime() > rightDt.getTime()) {
+							rightDt.setHours(closeTime.getHours(), closeTime.getMinutes());
+						}
+
+						stxx.setRange({
+							span: "day",
+							dtLeft: leftDt,
+							dtRight: rightDt,
+							goIntoFuture: true
+						}, cb);
+					} else {
+						cb();
+					}
+					break;
+				case "5D":
+					stxx.setSpan({
+						span: "day",
+						multiplier: 7
+					}, cb);
+					break;
+				case "1M":
+				case "30D":
+					stxx.setSpan({
+						span: "month",
+						multiplier: 1
+					}, cb);
+					break;
+				case "3M":
+					stxx.setSpan({
+						span: "month",
+						multiplier: 3
+					}, cb);
+					break;
+				case "6M":
+					stxx.setSpan({
+						span: "month",
+						multiplier: 3
+					}, cb);
+					break;
+				case "1Y":
+					stxx.setSpan({
+						span: "month",
+						multiplier: 12
+					}, cb);
+					break;
+				case "YTD":
+					stxx.setSpan({
+						span: "ytd",
+						multiplier: 1
+					}, cb);
+					break;
+				}
+
+				resizeScreen();
+
+			}
+
+			setRange = function (value) { //this needs to be made available to parent
+
+				clearHeadsUpHR();
+
+				$$('chartContainer').style.visibility = "hidden";
+
+				//force a refresh on range change
+				if (value != _range) {
+					_range = value;
+					getBaseLine();
+					return false;
+				}
+
+				range = value;
+
+				//chart.baseline.includeInDataSegment = true;
+				chart.xAxis.useDataDate = true;
+
+				switch (range) {
+				case "1D":
+					if(!stxx.chart.market.isMarketDay() || stxx.chart.market.getOpen() > new Date) {
+						base = 'day'
+						multiplier = '2'
+					} else {
+						base = 'today'
+						multiplier = '1'
+					}
+					stxx.newChart(symbol, null, null, cb, {
+						span: {
+							base: base,
+							multiplier: multiplier
+						}
+					});
+					break;
+				case "5D":
+					stxx.newChart(symbol, null, null, cb, {
+						span: {
+							base: "day",
+							multiplier: 7
+						}
+					});
+					break;
+				case "1M":
+				case "30D":
+					stxx.newChart(symbol, null, null, cb, {
+						span: {
+							base: "day",
+							multiplier: 30
+						}
+					});
+					break;
+				case "3M":
+					stxx.newChart(symbol, null, null, cb, {
+						span: {
+							base: "month",
+							multiplier: 3
+						},
+						periodicity: {
+							interval: "day",
+							period: 1
+						}
+					});
+					break;
+				case "6M":
+					stxx.newChart(symbol, null, null, cb, {
+						span: {
+							base: "month",
+							multiplier: 6
+						}
+					});
+					break;
+					//case "YTD":
+				case "1Y":
+					stxx.newChart(symbol, null, null, cb, {
+						span: {
+							base: "year",
+							multiplier: 1
+						}
+					});
+					break;
+				case "5Y":
+					stxx.newChart(symbol, null, null, cb, {
+						span: {
+							base: "year",
+							multiplier: 5
+						}
+					});
+					break;
+				case "YTD":
+					stxx.newChart(symbol, null, null, cb, {
+						span: {
+							base: "ytd",
+							multiplier: 1
+						}
+					});
+					break;
+
+
+				}
+
+				if (!CNBCMultiSnapshot.isForexSymbol(symbol) && !CNBCMultiSnapshot.isIndexSymbol(symbol)) {
+
+					sd = STX.Studies.addStudy(
+						stxx,
+						"vol undr"
+					);
+				} else {
+					if (sd) STX.Studies.removeStudy(stxx, sd);
+				}
+
+				resizeScreen();
+
+
+
+			};
+
+
+
+			function displayChart() {
+				/*if (parent.needsEncryption && !parent.setXigniteEncryptedToken(STX.QuoteFeed.Xignite.Utility.overrides, true)) {
+					setTimeout(displayChart, 100);
+					return;
+				}
+				stxx.initializeChart();*/
+				setRange(range);
+			}
+
+			function resizeScreen() {
+				var chartContainer = $$("chartContainer");
+				chartContainer.style.height = (window.innerHeight - 2) + "px";
+				chartContainer.style.width = (window.innerWidth) + "px";
+				setTimeout(function () {
+					stxx.resizeChart();
+				}, 0);
+
+			}
+
+			/*STXChart.prototype.append("resizeChart", function (maintainScroll) {
+				setMostRecentDaySpan();
+			});*/
+
+			STXChart.prototype.prepend("draw", function () {
+				if (!this.chart.dataSet || this.chart.dataSet.length === 0) {
+					this.initializeChart();
+					this.watermark("chart", {
+						h: "center",
+						v: "middle",
+						text: "No data available for this range"
+					});
+					return true;
+				}
+				//this.watermark("chart", {h:"left", v:"bottom", text:"ChartIQ"});
+				return false;
+			});
+
+			/*STXChart.prototype.prepend("drawCurrentHR", function () {
+				return true;
+			});*/
+
+			function formatAMPM(date) {
+				var hours = date.getHours();
+				var minutes = date.getMinutes();
+				var ampm = hours >= 12 ? 'PM' : 'AM';
+				hours = hours % 12;
+				hours = hours ? hours : 12; // the hour '0' should be '12'
+				minutes = minutes < 10 ? '0'+minutes : minutes;
+				var strTime = hours + ':' + minutes + ' ' + ampm;
+				return strTime;
+			}
+
+			// Update the head's up display
+			function prependHeadsUpHR() {
+				var tick = this.tickFromPixel(Math.floor((STXChart.crosshairX - this.left)));
+				var prices = this.chart.dataSet[tick];
+
+				clearHeadsUpHR();
+				if (prices) {
+					$$("huOpen").innerHTML = 'O: ' + this.formatPrice(prices.Open);
+					$$("huClose").innerHTML = 'C: ' + this.formatPrice(prices.Close);
+					$$("huHigh").innerHTML = 'H: ' + this.formatPrice(prices.High);
+					$$("huLow").innerHTML = 'L: ' + this.formatPrice(prices.Low);
+					if (prices.Volume) $$("huVolume").innerHTML = 'V: ' + STX.condenseInt(prices.Volume);
+					var tickDate = prices.displayDate ? new Date(prices.displayDate) : new Date(prices.DT);
+
+					if (STXChart.isDailyInterval(this.layout.interval)) {
+						$$("huDate").innerHTML = 'DT: ' + (tickDate.getMonth() + 1) + '/' + tickDate.getDate() + '/' + tickDate.getFullYear();
+					} else {
+						$$("huDate").innerHTML = 'DT: ' + (tickDate.getMonth() + 1) + '/' + tickDate.getDate() + '/' + tickDate.getFullYear().toString().substr(2) + " " + formatAMPM(tickDate);
+					}
+
+					setHeadsUpBaseline();
+
+
+				}
+			}
+
+
+
+			STXChart.prototype.prepend("headsUpHR", prependHeadsUpHR);
+
+
+
+
+			resizeScreen();
+			window.addEventListener("resize", resizeScreen);
+
+			//stxx.newChart(symbol, null, null, setRange);
+			chart.symbol = symbol;
+			//stxx.initializeChart();
+			setRange(range);
+
+			//displayChart();
+
+		}
+
+		var changeChart;
+
+		function launchChart(range, symbol, symbolName, chartType) {
+			if (symbol != _symbol) {
+				if (changeChart != symbol) {
+					console.log('Prevent superfast chart changes');
+				}
+				stxx.masterData = null
+				stxx.chart.masterData = null;
+				stxx.chart.dataSegment = null;
+				stxx.chart.dataSet = null;
+
+				var ftse_hide = window.location.href.match(/&ftse_hide=(.)[&]*/i);
+
+				if(ftse_hide && ftse_hide[1] == '1') {
+					if(symbol === '.FTSE') {
+				        stxx.allowScroll = false;
+				        stxx.allowZoom = false;
+					    $$$(".stx_chart_controls").style.visibility = "hidden";
+		            } else {
+		                stxx.allowScroll = true;
+			            stxx.allowZoom = true;
+			            $$$(".stx_chart_controls").style.visibility = "";
+			        }
+				}
+
+				setRangeAndSymbol(range, symbol, symbolName, chartType);
+			} else {
+				setRange(range);
+			}
+		}
+
+		var receiveMessage = function (e) {
+			var splitData = e.data.split('||');
+			switch (splitData[0]) {
+			case 'launchChart':
+				changeChart = splitData[2];
+				setTimeout(launchChart, 150, splitData[1], splitData[2], splitData[3], splitData[4]);
+				break;
+			case 'setRange':
+				setRange(splitData[1]);
+				break;
+			case 'streamTrade':
+				streamTrade(splitData[1], splitData[2], splitData[3]);
+				break;
+			case 'setChartType':
+				setChartType(splitData[1]);
+				break;
+			}
+
+		}
+
+		window.addEventListener('message', receiveMessage, false);
+
+		// make charts work by passing symbol to the URL.
+		if (_symbol) getBaseLine();
+	</script>
+
+
+
+
+</body></html>

@@ -1,0 +1,120 @@
+div.videoCube a.video-cta-style {
+    width: 100%;
+}
+
+div.videoCube a.video-cta-style span.video-label-box.video-label-box-cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+div.videoCube a.video-cta-style span.video-label-box.video-label-box-cta.video-label-box-cta-non-ie {
+    justify-content: space-between;
+}
+
+div.videoCube a.video-cta-style span.video-label-flex-cta-item {
+    flex-basis: 100%;
+}
+
+div.videoCube a.video-cta-style span.video-branding-flex-cta-item {
+    flex-grow: 1;
+    flex-basis: 1px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+div.videoCube a.video-cta-style span.video-branding-flex-cta-item-no-stream {
+    margin-top: 5px;
+}
+
+div.videoCube a.video-cta-style.non-feed-cta-item span.video-branding-flex-cta-item-no-stream {
+    margin-top: 3px;
+}
+
+div.videoCube a.video-cta-style a.video-cta-href {
+    display: inline-block;
+    margin: 5px 2px 0px 2px;
+    padding: 0;
+    min-width: 72px;
+    max-width: 100px;
+    bottom: 0;
+    vertical-align: top;
+    position: relative;
+    box-sizing: content-box;
+    align-self: start;
+    order: 2;
+    flex-shrink: 0;
+    font-size: 10px;
+    line-height: 13.2px;
+}
+
+div.videoCube a.video-cta-style.non-feed-cta-item a.video-cta-href {
+    margin-top: 0px;
+    min-width: 68px;
+    max-width: 100px;
+}
+
+div.videoCube a.video-cta-style span.video-branding-flex-cta-rating {
+    flex-basis: 100%;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    margin-top: 5px;
+    direction: ltr;
+}
+
+div.videoCube a.video-cta-style span.video-branding-flex-cta-rating span.video-branding-flex-cta-stars-wrapper {
+}
+
+div.videoCube a.video-cta-style span.video-branding-flex-cta-rating span.video-branding-flex-cta-oval-wrapper {
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+div.videoCube a.video-cta-style span.video-branding-flex-cta-rating span.video-branding-flex-cta-oval-wrapper svg.cta-rating-oval {
+    vertical-align: middle;
+    margin-bottom: 1px;
+    height: 3px;
+    width: 3px;
+}
+
+div.videoCube a.video-cta-style span.video-branding-flex-cta-rating span.video-branding-flex-cta-price-wrapper {
+    font-family: Helvetica Bold;
+    font-size: 10px;
+    color: #737373;
+}
+
+div.videoCube a.video-cta-style span.video-branding-flex-cta-rating svg.cta-rating-star {
+    margin-right: 4px;
+    height: 9px;
+    width: 9px;
+}
+
+div.videoCube a.video-cta-style a.video-cta-href button.video-cta-button {
+    margin: 0;
+    height: 24px;
+    font-size: 10px;
+    line-height: 13.2px;
+    border-radius: 4px;
+    color: #333333;
+    border: 1px solid #999990;
+    background-color: inherit;
+    border-color: #999999;
+    text-transform: capitalize;
+    letter-spacing: normal;
+    box-sizing: border-box;
+    font-weight: 400;
+    cursor: pointer;
+    outline: none;
+    font-family: Helvetica;
+    padding: 1px 4px;
+    width: 100%;
+    min-width: 1px;
+    opacity: 1;
+}
+
+div.videoCube a.video-cta-style a.video-cta-href button.video-cta-button:hover {
+    color: inherit;
+    border-color: inherit;
+    background-color: inherit;
+    letter-spacing: normal;
+}
